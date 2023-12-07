@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+
+
+       body{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+       }
         
         .container{
-           
+            width: 100%;
+            height: 100vh;
+            background-image: url(FrontImg.html/bg.webp);
             
+            background-position: center;
+            background-size: cover;
+            position: relative;
             padding: 50px 50px 70px;
             text-align: center;
+            position: fixed;
         }
 
        .container h1{
@@ -33,11 +46,11 @@
        }
 
        .button-2 button{
-        background-color: rgb(147, 147, 222);
+        background-color: rgb(155, 215, 155);
         width: 100px;
         padding-top: 10px;
         padding-bottom: 10px;
-        border-radius: 20px;
+        border-radius: 5px;
         border: 0;
         outline: 0;
        }
@@ -52,63 +65,62 @@
         overflow: hidden;
        }
 
-       header{
-            display: flex;
-            justify-content: space-between;
-            
-        }
-        header li{
-        margin-left: 7px;
-        list-style-type: none;
+    
 
-   }
-        header ul  {
-        display: flex;
-        justify-content: flex-end;
+       
 
+  .container-2{
+    background-color: gray;
+    border-radius: 20px;
+    /* width: 500px;
+    text-align: center; */
+    width: 500px;
+    margin-left: 600px;
+    opacity: 0.7;
+    padding-top: 10px;
+    padding-bottom: 20px;
   }
+
+ 
+
 
     </style>
 </head>
 <body>
-    <header>
-        <div class="headeri">
-            <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
-        </div>
-        <ul>
-            <li>About</li>
-            <li>Videos</li>
-            <li>Info</li>
-            <li>Contact</li>
-        </ul>
-        
-    </header>
+
+ 
+   
+  
+      
 
     <div class="container">
-        <h1 id="title">Sign Up</h1>
-        <form action="">
-           <div class="input-group">
-            <div class="input-field" id="nameField">
-               <img src="" alt="ikona1">
-               <input type="text" placeholder="Name">
-            </div>
-
-            <div class="input-field">
-                <img src="" alt="ikona2">
-                <input type="email" placeholder="email">
-             </div>
-
-             <div class="input-field">
-                <img src="" alt="ikona3">
-                <input type="password" placeholder="password">
-             </div>
-             <p>Forgot password <a href="#">Click Here</a></p>
-            </div> 
-            <div class="button-2">
-                <button type="button" id="signup">Sign Up</button>
-                <button type="button" id="signin">Sign in</button>
-            </div>
-        </form>
+        <div class="container-2">
+            <h1 id="title">Sign Up</h1>
+            <form action="">
+               <div class="input-group">
+                <div class="input-field" id="nameField">
+                   <!-- <img src="" alt="ikona1"> -->
+                   <input type="text" placeholder="Name">
+                </div>
+    
+                <div class="input-field">
+                    <!-- <img src="" alt="ikona2"> -->
+                    <input type="email" placeholder="email">
+                 </div>
+    
+                 <div class="input-field">
+                    <!-- <img src="" alt="ikona3"> -->
+                    <input type="password" placeholder="password">
+                 </div>
+                 <p>Forgot password <a href="#">Click Here</a></p>
+                </div> 
+                <div class="button-2">
+                    <button type="button" id="signup">Sign Up</button>
+                    <button type="button" id="signin">Sign in</button>
+                </div>
+            </form>
+        </div>
+        
     </div>
     <script>
         let signup = document.getElementById("signup");
