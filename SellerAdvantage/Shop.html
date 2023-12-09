@@ -3,9 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Christmas decoration</title>
+    <style>
+          body{
+            margin: 0; 
+            padding: 0;
+            
+        }
+        header{
+            display: flex;
+            justify-content: space-between;
+            
+        }
+        header li{
+          padding: 15px;
+        margin-left: 15px;
+        list-style-type: none;
+
+   }
+        header ul  {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 20px;
+
+  }
+section{
+  padding:5% 10%;
+
+}
+
+.main-home{
+  width:wrap;
+  height: 100px;
+  text-align: center;
+  background-image: url(FrontImg.html/shopheader.png);
+  background-position: center;
+  background-size: cover;
+  display:grid;
+  align-items:picture-in-picture;
+  
+}
+
+.main-text h1{
+  color: beige;
+  font-size:200 px;
+  text-transform: capitalize;
+  font-weight: 600;
+  
+}
+
+ /* Pjesa e Produkteve CSS*/
+
+ .center-text{
+  color: black;
+  font-size: 30px;
+  text-transform: capitalize;
+  text-align: center;
+ }
+.products{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, auto));
+  gap: 2rem;
+}
+.row{
+  position: relative;
+  transition: all .40s;
+
+}
+.row img{
+  width: 100%;
+  height: auto;
+  transition: all .40s;
+}
+ 
+.product-text h5{
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: #27b737;
+  padding: 3px 10px;
+  border-radius: 2px;
+  font: caption;
+
+
+}
+
+
+
+
+
+    </style>
 </head>
+
+
 <body>
+    <header>
+        <div class="headeri">
+            <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
+        </div>
+        <ul>
+            <li>About</li>
+            <li>Videos</li>
+            <li>Info</li>
+            <li>Contact</li>
+        </ul>
+    </header>
+
+    <section class="main-home">
+      <div class="main-text">
+        <h1> New Holiday Collection
+          <br>
+          Wrap the Presents!
+        </h1>
+      </div>
+    </section>
+
+
+<!-- Pjesa e Produkteve-->
+
+<section class="'products" id="products">
+  <div class="center-text">
+    <h2>Our Christmas Related Products</h2>
+  </div>
+
+  <div class="products">
+    <div class="row">
+      <img src="FrontImg.html/Luxury Christmas tree 3000 LEDs H 180 cm.jpg" alt="">
+      <div class="product-text">
+        <h5 style="color: red;">SALE 15%</h5>
+      </div>
+      <div class="price">
+        <h4>Luxury Christmas tree </h4>
+        <p>€ 790,00 - € 671,50</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/box of 9 glass balls 2.jpg" alt="">
+      <div class="product-text">
+        <h5> NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Box of 9 glass balls</h4>
+        <p>€ 39,99</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/box of 9 glass balls.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Box of 9 glass balls </h4>
+        <p>€ 39,99</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/fluffy cushion with embroidery 45x45cm.jpg" alt="">
+      <div class="product-text">
+        <h5>NEw</h5>
+      </div>
+      <div class="price">
+        <h4>Fluffy cushion whith embroidery </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/Warm fabric cushion 45x45cm.jpg" alt="">
+      <div class="product-text">
+        <h5> NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Warm fabric cushion</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/Jacquard knitted cushion 40x60cm.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Jacquard knitted cushion </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/Jacquard knitted cushion 45x45cm.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Jacquard knitted cushion </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/jacquard knitted cushion with writing 40x46cm.jpg" alt="">
+      <div class="product-text">
+        <h5>NEw</h5>
+      </div>
+      <div class="price">
+        <h4>Jacquard knitted cushion with writing </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/teddy fabric chushion with embroidery 45x45cm.jpg" alt="">
+      <div class="product-text">
+        <h5> NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Teddy fabric chushion with embroidery </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/christmas tree velvet cushion.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Christmas tree velvet cushion </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/Embroidered sherpa fabric cushion 45x45cm.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Embroidered sherpa fabric cushion </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/candle in a star-shaped container.jpg" alt="">
+      <div class="product-text">
+        <h5>NEw</h5>
+      </div>
+      <div class="price">
+        <h4>candle in a star-shaped container </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/candle in star-shaped glass container.jpg" alt="">
+      <div class="product-text">
+        <h5> NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Candle in a star-shaped container </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/muffin candle handcrafted.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Muffin candle handcrafted</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/decorated candle.jpg" alt="">
+      <div class="product-text">
+        <h5>NEw</h5>
+      </div>
+      <div class="price">
+        <h4>Decorated candle</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/decoration candle.jpg" alt="">
+      <div class="product-text">
+        <h5> NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Decoration candle</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/christmas tree candle.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>christmas tree candle </h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/christmas tree candle2.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Christmas tree candle</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/set of 2 lacquered wax candles.jpg" alt="">
+      <div class="product-text">
+        <h5>NEw</h5>
+      </div>
+      <div class="price">
+        <h4>Set of 2 lacquered wax candles</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/set of 6 Christmas tree candles.jpg" alt="">
+      <div class="product-text">
+        <h5> NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Set of 6 lacquered wax candles</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/mouth blown glass sphere hand colored by european artisans.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Mouth blown glass sphere hand colored by european artisans</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/decorative sequin bow.jpg" alt="">
+      <div class="product-text">
+        <h5>NEw</h5>
+      </div>
+      <div class="price">
+        <h4>Decorative sequin bow</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/decorative velvet bow.jpg" alt="">
+      <div class="product-text">
+        <h5> NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Decorative velvet bow</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/set of three velvet effect boxes.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Set of three velvet effect boxes</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/decorative wreath with berries and pine cones.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Decorative wreath with berries and pine cones</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/decorative wreath with berries.jpg" alt="">
+      <div class="product-text">
+        <h5>NEw</h5>
+      </div>
+      <div class="price">
+        <h4>decorative wreath with berries</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/decorative wreath with pine branches and pine cones.jpg" alt="">
+      <div class="product-text">
+        <h5> NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Decorative wreath with pine branches and pine cones</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="FrontImg.html/decorative wreath with pines.jpg" alt="">
+      <div class="product-text">
+        <h5>NEW</h5>
+      </div>
+      <div class="price">
+        <h4>Decorative wreath with pines</h4>
+        <p>€ 34,00</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  
+
+
+</section>
+
+
     
 </body>
 </html>
