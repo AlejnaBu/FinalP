@@ -76,7 +76,11 @@ section{
   height: auto;
   transition: all .40s;
 }
- 
+ .row.img:hover{
+  transform:translateY(5px)
+
+ }
+
 .product-text h5{
   position: absolute;
   top: 13px;
@@ -93,7 +97,7 @@ section{
 
 }
 
-/* Pjesa e Pagination*/
+/* Pjesa e Pagination
 
 .pagination{
   text-align: center;
@@ -147,6 +151,51 @@ transform: translateX(-5px);
 
 .disable{
   background: grey;
+}
+
+*/
+
+
+
+@media only screen and (max-width: 600px) {
+  /* Adjustments for screens up to 600px width */
+
+  /* Header */
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  header ul {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  header li {
+    margin: 0;
+    padding: 8px;
+  }
+
+  /* Main Text */
+  .main-text h1 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  /* Products */
+  .products {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .row img {
+    max-width: 100%;
+  }
+
+  .price h4 {
+    font-size: 14px;
+  }
 }
 
 
@@ -554,7 +603,7 @@ transform: translateX(-5px);
 
 </section>
 
-<!-- Kodi per Pagination -->
+<!-- Kodi per Pagination 
 
 <div class="pagination">
   <li class="page-item previous-page disable"><a class="page-link" href="#">Prev</a></li>
@@ -564,15 +613,8 @@ transform: translateX(-5px);
   <li class="page-item next-page"><a class="page-link" href="#">Next</a></li>
 </div>
   
-<script type="text/javascript">
-  fuction getPageList(totalPages, page, maxLength){
-    fuction range(start, end){
-      return Array.from(Array(end - start + 1), (_,i)=> i+start);
-    }
-   var sideWidth = maxLendth <
+-->
 
-  }
-</script>
 
 
 
