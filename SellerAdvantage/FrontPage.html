@@ -29,6 +29,37 @@
         justify-content: flex-end;
         }
 
+        @media only screen and (max-width: 600px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    header ul {
+        margin-top: 10px;
+        justify-content: center;
+    }
+
+    header li {
+        margin: 5px;
+    }
+
+    .headeri {
+        margin-bottom: 10px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
 
         /* --------- */
 
@@ -55,6 +86,14 @@
             
         }
 
+        @media only screen and (max-width: 600px) {
+    .overlay-text {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
     
 
 
@@ -79,6 +118,22 @@
             display: flex;
  
         }
+
+        @media only screen and (max-width: 600px) {
+    .containers {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .containers img {
+        width: 50px;
+        margin: 10px 0;
+    }
+
+    .containers div {
+        flex-direction: column;
+    }
+}
 
 
  
@@ -152,43 +207,6 @@
         }
 
 
-         .container2{
-            padding-top: 60px;
-            padding-bottom: 60px;
-            background-color: rgb(244, 244, 219);
-            width: 100%;
-            font-family: cursive;
-        }
-
-        .container2 .img{
-            float: left;
-            border-radius: 50px;
-            margin-left: 100px;
-            
-        }
-
-        .container2 .container2Tekst{
-           display: inline-block;
-           margin-left: 600px;
-           margin-top: 30px;
-        }
-
-        .container2Tekst button{
-            margin-left: 130px;
-            border: none;
-            width: 100px;
-            height: 40px;
-            border-radius: 7px;
-            background-color: rgb(228, 181, 96);
-            color: white;
-            transition: opacity 1s;
-        }
-
-        .container2 h2{
-            color: rgb(0, 0, 0);
-        } 
-
-
         .container3{
             padding-top: 60px;
             padding-bottom: 120px;
@@ -224,6 +242,35 @@
             
         }
 
+        @media only screen and (max-width: 600px) {
+    .container3 {
+        padding-top: 30px;
+        padding-bottom: 60px;
+    }
+
+    .container3 .img2 {
+        float: none;
+        margin-right: 0;
+        margin-bottom: 20px; 
+        width: 100%;
+        border-radius: 0;
+        margin-left: 60px;
+    }
+
+    .container3 .container3Tekst {
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+    .container3 h1 {
+        margin-left: 20px;
+    }
+
+    .container3Tekst button {
+        margin-left: 20px;
+    }
+}
+
         footer{
            color: white;
            background-color: rgb(26, 24, 24);
@@ -238,6 +285,20 @@
         .f{
           color: rgb(98, 228, 139);
          }
+
+
+         @media screen and (max-width: 600px) {
+    .footermain {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footerleft,
+    .footercenter,
+    .footerright {
+        margin-bottom: 20px;
+    }
+}
 
    .btn_prev_next{
     border: none;
@@ -263,14 +324,14 @@ body {font-family: Verdana, sans-serif; margin:0}
 .mySlides {display: none}
 img {vertical-align: middle;}
 
-/* Slideshow container */
+
 .slideshow-container {
   max-width: 1000px;
   position: relative;
   margin: auto;
 }
 
-/* Next & previous buttons */
+
 .prev, .next {
   cursor: pointer;
   position: absolute;
@@ -286,18 +347,18 @@ img {vertical-align: middle;}
   user-select: none;
 }
 
-/* Position the "next button" to the right */
+
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
+
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
-/* Caption text */
+
 .text {
   color: #f2f2f2;
   font-size: 15px;
@@ -344,8 +405,8 @@ img {vertical-align: middle;}
   to {opacity: 1}
 }
 
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
+
+@media only screen and (max-width: 600px) {
   .prev, .next,.text {font-size: 11px}
 }
 
@@ -356,11 +417,6 @@ img {vertical-align: middle;}
 }
 
 
-
-
-
-
- 
     </style>
 </head>
 <body>
