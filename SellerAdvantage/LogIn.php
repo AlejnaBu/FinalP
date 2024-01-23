@@ -1,4 +1,51 @@
+<?php
+$host = "localhost";
+$username = "root";
+$password = "";
+$db = "databaza";
+
+session_start();
+
+$data = mysqli_connect($host, $username, $password, $db);
+
+if ($data == false) {
+    die("Connection failed");
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $result = mysqli_query($data, $sql);
+
+    if (!$result) {
+        die("SQL query failed: " . mysqli_error($data));
+    }
+
+    $row = mysqli_fetch_array($result);
+
+    if ($row) { // Check if a matching user is found
+        // After successful login
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['usertype'] = $row['usertype'];
+
+        // Redirect to the appropriate page
+        if ($row['usertype'] === 'admin') {
+            header("location: AdminDashboard.php");
+        } else {
+            header("location: FrontPage.php"); // or any other non-admin page
+        }
+    } else {
+        echo "username or password is incorrect";
+    }
+}
+?>
 <!DOCTYPE html>
+
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -72,10 +119,8 @@
   .container-2{
     background-color: gray;
     border-radius: 20px;
-    /* width: 500px;
-    text-align: center; */
     width: 500px;
-    margin-left: 600px;
+    margin-left: 500px;
     opacity: 0.7;
     padding-top: 10px;
     padding-bottom: 20px;
@@ -105,60 +150,30 @@
 </head>
 <body>
 
- 
-   
-  
-      
-
     <div class="container">
         <div class="container-2">
-            <h1 id="title">Sign Up</h1>
-            <form action="">
+            <h1 id="title">Log In</h1>
+            <form action="#" method="POST">
                <div class="input-group">
                 <div class="input-field" id="nameField">
-                   <!-- <img src="" alt="ikona1"> -->
-                   <input type="text" placeholder="Name">
                 </div>
-    
+
                 <div class="input-field">
-                    <!-- <img src="" alt="ikona2"> -->
-                    <input type="email" placeholder="email">
+                    <input type="text" placeholder="username" name="username">
                  </div>
     
                  <div class="input-field">
-                    <!-- <img src="" alt="ikona3"> -->
-                    <input type="password" placeholder="password">
+                    <input type="password" placeholder="password" name="password">
                  </div>
-                 <p>Forgot password <a href="#">Click Here</a></p>
+                 <p>Don't have an account <a href="SignUp.php">Click Here</a></p>
                 </div> 
-                <div class="button-2">
-                    <button type="button" id="signup">Sign Up</button>
-                    <button type="button" id="signin">Sign in</button>
-                </div>
+                <div class="input-field">
+                    <input type="submit" placeholder="submit" name="submit">
+                 </div>
             </form>
         </div>
         
     </div>
-    <script>
-        let signup = document.getElementById("signup");
-        let signin = document.getElementById("signin");
-        let nameField = document.getElementById("nameField");
-        let title = document.getElementById("title");
-
-        signin.onclick = function(){
-            nameField.style.maxHeight = "0";
-            title.innerHTML = "Sign In";
-            signup.classList.add("disable");
-            signin.classList.remove("disable");
-        }
-
-        signup.onclick = function(){
-            nameField.style.maxHeight = "60px";
-            title.innerHTML = "Sign UP";
-            signup.classList.remove("disable");
-            signin.classList.add("disable");
-        }
-
-    </script>
+  
 </body>
-</html>
+</html>  
