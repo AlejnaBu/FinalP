@@ -15,15 +15,19 @@ if ($data == false) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $usertype = $_POST["usertype"];
+    // $usertype = $_POST["usertype"];
     $email = $_POST["email"];
 
     
 
-    $sql = "INSERT INTO users (username, password, usertype, email) VALUES ('$username', '$password', '$usertype' , '$email')";
+    $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')";
 
     if (mysqli_query($data, $sql)) {
-        echo "User registration successful";
+        $cookie_name = "registration_success";
+        $cookie_value = "true";
+        setcookie($cookie_name, $cookie_value, time() + 3600, "/"); // Expires in 1 hour
+
+        echo '<script>alert("User registration successful");</script>';
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($data);
     }
@@ -148,10 +152,6 @@ padding-bottom: 20px;
                     <input type="password" placeholder="password" name="password">
                  </div> <br>
 
-                 <div class="input-field">
-                    <!-- <label>Usertype</label> -->
-                    <input type="text" placeholder="usertype" name="usertype">
-                 </div> <br>
                  <div class="input-field">
                     <!-- <label>Email</label> -->
                     <input type="text" placeholder="email" name="email">

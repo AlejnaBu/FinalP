@@ -29,8 +29,46 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <style>
+         body{
+            margin: 0;  /*Per me eliminu default space*/
+            padding: 0;
+            background-color: rgb(243, 243, 228);
+           
+            
+        }
+        /* Kodi per Header */
+
+        header{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        header li{
+        margin-left: 7px;
+        list-style-type: none;
+        }
+
+        header ul  {
+        display: flex;
+        justify-content: flex-end;
+        }
+    </style>
 </head>
-<body>
+<body>  
+
+<header>
+            <div class="headeri">
+                <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
+            </div>
+            <ul>
+                <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
+                <li><a style="text-decoration: none; color: black;" href="SignUp.php"></a>SignUp</li>
+                <li><a style="text-decoration: none; color: black;" href="ContactUs.php">Contact</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
+            </ul>
+        </header>
+
     <h1>Welcome, Admin!</h1>
 
     <?php

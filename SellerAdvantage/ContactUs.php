@@ -283,34 +283,6 @@ footer::after{
 </head>
 <body>
     
-    
-     <!-- <footer>
-        <div class="f">
-            <h2>About Us</h2>
-            <h2>Our Links</h2>
-           
-        </div>
-        <div class="footermain">
-            <div class="footerleft">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-                     Nobis nihil autem, consequatur dolor maiores, sapiente <br>
-                    corrupti nemo repellat ratione fuga neque. Quae dolorum <br>
-                    rem eos placeat perspiciatis quas, veritatis delectus! <br>
-                 </p>
-            </div>
-            <div class="footercenter">
-                <p>Advertise</p>
-                <p>Support</p>
-                <p>Our Company</p>
-                <p>Contact</p>
-            </div>
-            <div class="footerright">
-                <p>Terms of use</p>
-                <p>Privacy Policy</p>
-            </div>
-        </div>
-        
-    </footer>  -->
      <footer>
         <div class="footer-first">
             <div class="contact">
@@ -392,12 +364,6 @@ footer::after{
                     <input type="text" placeholder="Enter Email Here" required>
                     <input type="submit">
                 </div>
-            </div>
-        </div> 
-        <!-- <div class="copyright">
-            <div class="copyright-container">
-                <h1>Copyright &copy; 2018 - All Rights Reserved</h1>
-                <h1>Template by Elinda Krasniqi</h1>
             </div>
         </div> 
      </footer> 

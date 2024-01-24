@@ -31,35 +31,8 @@
         justify-content: flex-end;
         }
 
-        /* Kodi per Responsive Header */
-        @media only screen and (max-width: 600px) {
-    body {
-        margin: 0;
-        padding: 0;
-    }
+ 
 
-    header {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-    }
-
-    header ul {
-        margin-top: 10px;
-        justify-content: center;
-    }
-
-    header li {
-        margin: 5px;
-    }
-    .headeri {
-        margin-bottom: 10px;
-    }
-    img {
-        width: 100%;
-        height: auto;
-    }
-}
 
         /*Kodi per pjesen e pare */
         .image-container img{
@@ -70,26 +43,46 @@
         .image-container{
             position: relative;
         }
-        .overlay-text{
-            position: absolute;
-            top: 50%;
-            left: 40%;
-            text-align: center;
-            padding: 30px 30px ;
-            color: black;
-            opacity: 0.75;  
-            font-family: cursive;
-            font-style: italic;
-            
-            
-        }
-        /* Responsive */
 
-        @media only screen and (max-width: 600px) {
-         .overlay-text {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        /* Responsive */
+        .overlay-text {
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             text-align: center;
+             padding: 15px;
+             color: black;
+             opacity: 0.75;
+             font-family: cursive;
+             font-style: italic;
+             box-sizing: border-box;
+             max-width: 80%; 
+          }
+
+        @media only screen and (max-width: 425px) {
+        .headeri img {
+        height: 60px; /* Adjust header logo height for smaller screens */
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .overlay-text {
+        display: none; /* Hide the overlay text on smaller screens */
     }
 }
       /* Kodi per 4-img */
@@ -112,24 +105,8 @@
             display: flex;
  
         }
-        /* Responsive img */
-        @media only screen and (max-width: 600px) {
-    .containers {
-        flex-direction: column;
-        text-align: center;
-    }
-    .containers img {
-        width: 50px;
-        margin: 10px 0;
-    }
-
-    .containers div {
-        flex-direction: column;
-    }
-}
 
    /* Pjesa e kodit per Slider */
-
  
    * {box-sizing: border-box}
 body {font-family: Verdana, sans-serif; margin:0}
@@ -435,7 +412,7 @@ img {vertical-align: middle;}
             </div>
             <ul>
                 <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
-                <li><a style="text-decoration: none; color: black;" href="SignUp.php"></a>SignUp</li>
+                <li><a style="text-decoration: none; color: black;" href="#"></a>#</li>
                 <li><a style="text-decoration: none; color: black;" href="ContactUs.php">Contact</a></li>
                 <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
             </ul>
