@@ -110,10 +110,10 @@ flex:1 1 45rem;
             <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
         </div>
         <ul>
-            <li><a style="text-decoration: none; color: black;" href="FrontPage.html">Home</a></li>
-            <li>About Us</li>
-            <li><a style="text-decoration: none; color: black;" href="ContactUs.html">Contact</a></li>
-            <li><a style="text-decoration: none; color: black;" href="LogIn.html">Log in</a></li>
+            <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
+            <li><a style="text-decoration: none; color: black;" href="AboutUs.php">About Us</a></li>
+            <li><a style="text-decoration: none; color: black;" href="ContactUs.php">Contact</a></li>
+            <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
 
 
         </ul>

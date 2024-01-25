@@ -9,6 +9,21 @@
 
     <style>
 
+        header{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        header li{
+            margin-left: 7px;
+            list-style-type: none;
+        }
+
+        header ul  {
+            display: flex;
+            justify-content: flex-end;
+        }
+
    body{
     background: #292929;
    }
@@ -282,6 +297,18 @@ footer::after{
 
 </head>
 <body>
+
+<header>
+    <div class="headeri">
+        <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
+    </div>
+    <ul>
+        <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
+        <li><a style="text-decoration: none; color: black;" href="SignUp.php"></a>SignUp</li>
+        <li><a style="text-decoration: none; color: black;" href="ContactUs.php">Contact</a></li>
+        <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
+    </ul>
+</header>
     
      <footer>
         <div class="footer-first">
