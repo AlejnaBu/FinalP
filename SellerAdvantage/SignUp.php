@@ -4,7 +4,14 @@ $username = "root";
 $password = "";
 $db = "databaza";
 
+include 'dbConnect.php'; // Include the database connection file
+
 session_start();
+
+$dbConnect = new dbConnect();
+$data = $dbConnect->connectDB();
+
+
 
 $data = mysqli_connect($host, $username, $password, $db);
 

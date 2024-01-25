@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 session_start();
 
@@ -8,27 +8,29 @@ $dbConnect = new dbConnect();
 $data = $dbConnect->connectDB();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if the form is submitted for user creation
+   
     if (isset($_POST["create_user"])) {
         $username = $_POST["new_username"];
         $password = $_POST["new_password"];
         $email = $_POST["new_email"];
 
-        // Use prepared statement to prevent SQL injection
+        
         $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
         $stmt = $data->prepare($sql);
 
         if ($stmt->execute([$username, $password, $email])) {
-            // Handle success
+           
             echo '<script>alert("User registration successful");</script>';
         } else {
-            // Handle error
+           
             echo "Error: " . $stmt->errorInfo()[2];
         }
     }
 }
 
-// Fetch data from the users table using PDO
+
+
+
 $sql = "SELECT * FROM users";
 $result = $data->query($sql);
 
@@ -37,8 +39,32 @@ if (!$result) {
 }
 
 
+// DELETE - Delete a user
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_user"])) {
+    $user_id = $_POST["delete_user_id"];
+
+    $sql = "DELETE FROM users WHERE id = ?";
+    $stmt = $data->prepare($sql);
+
+    if ($stmt->execute([$user_id])) {
+        echo '<script>alert("User deleted successfully");</script>';
+    } else {
+        echo "Error: " . $stmt->errorInfo()[2];
+    }
+}
+
+$sql = "SELECT * FROM users";
+$result = $data->query($sql);
+
+if (!$result) {
+    die("SQL query failed: " . $data->errorInfo()[2]);
+}
 
 ?>
+
+
+
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,13 +97,7 @@ if (!$result) {
             margin-left:10px;
         }
 
-        input{
-        text-decoration: none; 
-        color: black;
-        }
-
-
-
+   
     </style>
 </head>
 <body>  
@@ -96,6 +116,12 @@ if (!$result) {
 
 <h1>Welcome, Admin!</h1>
 
+
+
+
+
+
+
 <?php
 // Additional debugging statements
 echo "Result set: " . var_export($result, true) . "<br>";
@@ -106,7 +132,7 @@ if ($result !== null) {
     $rows = $result->fetchAll(PDO::FETCH_ASSOC);
     if (count($rows) > 0) {
         ?>
-        <table border="1">
+        <table>
             <thead>
             <tr>
                 <th>ID</th>
@@ -114,6 +140,7 @@ if ($result !== null) {
                 <th>Password</th>
                 <th>Usertype</th>
                 <th>Email</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -124,6 +151,12 @@ if ($result !== null) {
                     <td><?= $row['password']; ?></td>
                     <td><?= $row['usertype']; ?></td>
                     <td><?= $row['email']; ?></td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="hidden" name="delete_user_id" value="<?= $row['id']; ?>">
+                            <button type="submit" name="delete_user" class="delete-btn">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             <?php } ?>
             </tbody>
@@ -138,21 +171,23 @@ if ($result !== null) {
 ?>
 
 <div class="create">
-<h2>Create a New User</h2>
-<form action="" method="post">
-    <label for="new_username"></label>
-    <input style="padding:5px; margin-bottom: 5px;"; type="text" id="new_username" name="new_username" placeholder="Userame" required><br>
+    <h2>Create a New User</h2>
+    <form action="" method="post">
+        <label for="new_username"></label>
+        <input style="padding:5px; margin-bottom: 5px;" type="text" id="new_username" name="new_username"
+               placeholder="Username" required><br>
 
-    <label for="new_password"></label>
-    <input style="padding:5px; margin-bottom: 5px;"; type="password" id="new_password" name="new_password" placeholder="Password" required><br>
+        <label for="new_password"></label>
+        <input style="padding:5px; margin-bottom: 5px;" type="password" id="new_password" name="new_password"
+               placeholder="Password" required><br>
 
-    <label for="new_email"></label>
-    <input style="padding:5px; margin-bottom: 5px;"; type="email" id="new_email" name="new_email" placeholder="Email" required><br>
+        <label for="new_email"></label>
+        <input style="padding:5px; margin-bottom: 5px;" type="email" id="new_email" name="new_email"
+               placeholder="Email" required><br>
 
-    <input type="submit" name="create_user" value="Create User">
-</form>
+        <input type="submit" name="create_user" value="Create User">
+    </form>
 </div>
-
 
 <p><a href="logout.php">Logout</a></p>
 

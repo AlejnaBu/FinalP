@@ -1,6 +1,6 @@
 <?php
 class dbConnect {
-    private $conn = null;
+    // private $conn = null;
     private $host = 'localhost';
     private $dbname = 'databaza';
     private $username = 'root';
