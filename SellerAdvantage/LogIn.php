@@ -1,3 +1,4 @@
+
 <?php
 $host = "localhost";
 $username = "root";
@@ -6,41 +7,40 @@ $db = "databaza";
 
 session_start();
 
-$data = mysqli_connect($host, $username, $password, $db);
-
-if ($data == false) {
-    die("Connection failed");
-}
+$data = new PDO("mysql:host=$host;dbname=$db", $username, $password);
+$data->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $result = mysqli_query($data, $sql);
+    // Use prepared statement to prevent SQL injection
+    $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+    $stmt = $data->prepare($sql);
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':password', $password);
+    $stmt->execute();
 
-    if (!$result) {
-        die("SQL query failed: " . mysqli_error($data));
-    }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $row = mysqli_fetch_array($result);
-
-    if ($row) { // Check if a matching user is found
-        // After successful login
+    if ($row) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['usertype'] = $row['usertype'];
-
-        // Redirect to the appropriate page
-        if ($row['usertype'] === 'admin') {
+    
+        if ($_SESSION['usertype'] == "user") {
+            header("location: FrontPage.php");
+        } elseif ($_SESSION['usertype'] == "admin") {
             header("location: AdminDashboard.php");
         } else {
-            header("location: FrontPage.php"); // or any other non-admin page
+            echo "Username or password is incorrect";
         }
     } else {
-        echo "username or password is incorrect";
+        echo "Username or password is incorrect";
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 
 
@@ -59,6 +59,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         padding: 0;
         box-sizing: border-box;
        }
+
+    
+
+      header{
+            display: flex;
+            justify-content: space-between;
+            width: 100%; 
+           z-index: 1000; /* Bon qe pjesa e header me nejt ntop*/
+            
+        }
+        header li{
+          padding: 15px;
+          margin-left: 15px;
+          list-style-type: none;
+
+       }
+        header ul  {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 20px;
+
+      }
         
         .container{
             width: 100%;
@@ -81,6 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        input{
        padding: 18px 15px;
        margin-top: 5px;
+       text-align: center;
        }
 
        form p {
@@ -150,9 +173,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
+<header>
+            <div class="headeri">
+                <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
+            </div>
+            <ul>
+                <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
+                <li><a style="text-decoration: none; color: black;" href="AboutUs.php">AboutUs</a></li>
+                <li><a style="text-decoration: none; color: black;" href="contact.php">Contact</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
+            </ul>
+        </header>
+
     <div class="container">
         <div class="container-2">
-            <h1 id="title">Log In</h1>
+            <h1 id="title">Sign Up</h1>
             <form action="#" method="POST">
                <div class="input-group">
                 <div class="input-field" id="nameField">

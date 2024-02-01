@@ -1,35 +1,34 @@
 <?php
-$host = "localhost";
-$username = "root";
-$password = "";
-$db = "databaza";
-
 session_start();
 
-$data = mysqli_connect($host, $username, $password, $db);
+include 'DbConnect.php'; // Include the database connection file
 
-if ($data == false) {
-    die("Connection failed");
-}
+$dbConnect = new DbConnect();
+$data = $dbConnect->getConnection();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    // $usertype = $_POST["usertype"];
     $email = $_POST["email"];
 
-    
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')";
+    // Use prepared statement to prevent SQL injection
+    $sql = "INSERT INTO users (username, password, email) VALUES (:username, :password, :email)";
+    $stmt = $data->prepare($sql);
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':password', $hashedPassword);
+    $stmt->bindParam(':email', $email);
 
-    if (mysqli_query($data, $sql)) {
+    if ($stmt->execute()) {
         $cookie_name = "registration_success";
         $cookie_value = "true";
         setcookie($cookie_name, $cookie_value, time() + 3600, "/"); // Expires in 1 hour
 
         echo '<script>alert("User registration successful");</script>';
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($data);
+        echo "Error: " . $stmt->errorInfo()[2];
     }
 }
 ?>
@@ -49,6 +48,26 @@ body{
  padding: 0;
  box-sizing: border-box;
 }
+
+header{
+            display: flex;
+            justify-content: space-between;
+            width: 100%; 
+           z-index: 1000; /* Bon qe pjesa e header me nejt ntop*/
+            
+        }
+        header li{
+          padding: 15px;
+          margin-left: 15px;
+          list-style-type: none;
+
+       }
+        header ul  {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 20px;
+
+      }
  
  .container{
      width: 100%;
@@ -131,9 +150,26 @@ padding-bottom: 20px;
 }
 }
 
+input{
+    text-align:center;
+}
+
 
 </style>
 <body>
+<header>
+            <div class="headeri">
+                <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
+            </div>
+            <ul>
+                <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
+                <li><a style="text-decoration: none; color: black;" href="AboutUs.php">AboutUs</a></li>
+                <li><a style="text-decoration: none; color: black;" href="contact.php">Contact</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
+            </ul>
+        </header>
+
 <div class="container">
         <div class="container-2">
             <h1 id="title">Sign Up</h1>

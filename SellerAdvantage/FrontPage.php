@@ -44,6 +44,18 @@
             position: relative;
         }
 
+        .img2{
+            width: 100%;
+            margin-left: 0;
+            height: auto;
+        }
+        .img2{
+            position: relative;
+        }
+
+       
+
+
         /* Responsive */
         .overlay-text {
              position: absolute;
@@ -272,119 +284,58 @@ img {vertical-align: middle;}
             text-align: center;
         }
 
-        /* Kodi per pjesen e parafundit */
 
+        .container3 {
+          margin-top:100px;
+          position: relative;
+          display: flex;
+          justify-content: flex-end;
+     }
 
-        .container3{
-            background-color: white;
-            padding-top: 90px;
-            padding-bottom: 90px;
-            width: 100%;
-            opacity: 0.90;
-            font-family: sans-serif;
-            font-size: 20px;
-        }
+      .container3 img {
+          width: 100%;
+          height: 500px;
+   
+         }
         
-        .container3 .img2{
-            float: right;
-            margin-right: 200px;
-            height: 300px;
-            width: 500px;
-           
-            
+        .container3Tekst{
+          position: absolute;
+          top: 50%;
+          right: 40%; 
+          transform: translateY(-50%);
+          max-width: 300px; 
+          color: black;
+          text-align: center; 
+          font-family: cursive;
+          font-style: italic;
+          
+    
         }
-
-        .container3 .container3Tekst{
-           display: inline-block;
-           margin-left: 100px;
-           margin-top: 30px;
-        }
-
-        .container3 h1{
-            color: rgb(0, 0, 0);
-        }
-
-        .container3Tekst button{
-            margin-left: 120px;
-            border: none;
-            width: 100px;
-            height: 40px;
-            background-color: black;
-            
-        } 
-
-        /* Responsive */
-
-         @media only screen and (max-width: 600px) {
-    .container3 {
-        padding-top: 30px;
-        padding-bottom: 60px;
-    }
-
-    .container3 .img2 {
-        float: none;
-        margin-right: 0;
-        margin-bottom: 20px; 
-        width: 100%;
-        border-radius: 0;
-        margin-left: 60px;
-    }
-
-    .container3 .container3Tekst {
-        margin-left: 20px;
-        margin-top: 10px;
-    }
-
-    .container3 h1 {
-        margin-left: 20px;
-    }
-
-    .container3Tekst button {
-        margin-left: 20px;
-    }
-}
-
-
 
     /* Kodi per footer */
          footer{
            color: white;
-           background-color: rgb(26, 24, 24);
+           background-color: black;
            width: 100%;
-           margin-top: 80px;
-           padding-top: 90px;
-           padding-bottom: 90px;
+           /* margin-top: 80px; */
+           padding-top: 70px;
+           padding-bottom: 70px;
         }
 
         .footermain{
            display: flex;
            justify-content: space-around;
-           font-family: Georgia;
+           font-family: cursive;
            font-style: italic;
+           font-size:15px;
            
         }
 
         .f{
           color: white;
-          text-decoration: underline;
-          text-decoration-color: purple;
         
          } 
 
-         /* Responsive Footer */
-/* 
-          @media screen and (max-width: 600px) {
-    .footermain {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footerleft,
-    .footercenter,
-    .footerright {
-        margin-bottom: 20px;
-    }
-} */
 
    .btn_prev_next{
     border: none;
@@ -412,7 +363,7 @@ img {vertical-align: middle;}
             </div>
             <ul>
                 <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
-                <li><a style="text-decoration: none; color: black;" href="#"></a>#</li>
+                <li><a style="text-decoration: none; color: black;" href="AboutUs.php">AboutUs</a></li>
                 <li><a style="text-decoration: none; color: black;" href="ContactUs.php">Contact</a></li>
                 <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
             </ul>
@@ -553,17 +504,15 @@ img {vertical-align: middle;}
 
 
     <div class="container3">
-               <!-- <img class="img2"   src="" alt=""> -->
-               <div class="container3Tekst">
-                <h2 >Holiday Decor Shopping</h2>
-                <!-- <h1 style="margin-left: 150px; color: red;">70% OFF</h1> -->
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-                     Adipisci veniam, sed repellat nihil exercitationem quae <br>
-                     voluptatem nostrum quisquam aliquid, animi ipsa, maiores <br>
-                     libero ipsam beatae praesentium ea ratione delectus itaque!</p>
-                     <button><a  style="color: white; text-decoration: none;" href="Shop.html">Click for more</a></button>
+               <img    src="FrontImg.html/shopimg.jpg" alt="">
+                <div class="container3Tekst">
+                <h2 style="color: #BC8F8F; text-decoration: none;" >Guess What's New On Our Decor Shop</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod cum exercitationem saepe magnam, eum suscipit. Dignissimos,
+                   </p>
+             <button style="padding: 10px; color: black; background-color: aliceblue; border: 0;"><a style="text-decoration: none; color: black;" href="Shop.php">Shop Now</a></button>
+                
 
-            </div>
+            </div> 
     </div>
 
      <footer>
