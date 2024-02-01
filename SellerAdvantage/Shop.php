@@ -52,52 +52,115 @@ section{
   font-weight: 600;
   
 }
+.products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
 
- /* Pjesa e Produkteve CSS*/
+        .product {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
- .center-text{
-  color: black;
-  font-size: 30px;
-  text-transform: capitalize;
-  text-align: center;
- }
-.products{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, auto));
-  gap: 2rem;
-}
-.row{
-  position: relative;
-  transition: all .40s;
+        .product img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
 
-}
-.row img{
-  width: 100%;
-  height: auto;
-  transition: all .40s;
-}
- .row.img:hover{
-  transform:translateY(5px)
+        .product h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
 
- }
+        .product p {
+            margin-bottom: 10px;
+            color: #777;
+        }
 
-.product-text h5{
-  position: absolute;
-  top: 13px;
-  left: 13px;
+        .product button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product button:hover {
+            background-color: #45a049;
+        }
+ 
+
+/* add to cart */ 
+
+.add-to-cart {
+  background-color: red;
+  border: none;
   color: white;
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
-  background-color: #27b737;
-  padding: 3px 10px;
-  border-radius: 2px;
-  font: caption;
-
-
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
+body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
 
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-content p {
+            margin: 0;
+            flex: 1;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .footer-links li {
+            margin: 0;
+        }
+
+        .footer-links li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-links li a:hover {
+            text-decoration: underline;
+        }
 
 
 
@@ -109,7 +172,9 @@ section{
 
 
 
-    </style>
+   </style>
+
+
 </head>
 
 
@@ -145,373 +210,203 @@ section{
     <h2>Our Christmas Related Products</h2>
   </div>
 
-  <div class="products">
-    <div class="row">
-      <img src="FrontImg.html/Luxury Christmas tree 3000 LEDs H 180 cm.jpg" alt="">
-      <div class="product-text">
-        <h5 style="color: red;">SALE 15%</h5>
-      </div>
-      <div class="price">
-        <h4>Luxury Christmas tree </h4>
-        <p>€ 790,00 - € 671,50</p>
-      </div>
+  <section class="products" id="products">
+    <div class="product">
+        <img src="FrontImg.html/Luxury Christmas tree 3000 LEDs H 180 cm.jpg" alt="">
+        <div class="product-text">
+            <h4>Luxury Christmas tree</h4>
+            <p><s>€ 790,00</s> - <strong>€ 671,50</strong></p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/box of 9 glass balls 2.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Box of 9 glass balls</h4>
-        <p>€ 39,99</p>
-      </div>
+    <div class="product">
+        <img src="FrontImg.html/box of 9 glass balls 2.jpg" alt="">
+        <div class="product-text">
+            <h4>Box of 9 glass balls</h4>
+            <p>€ 39,99</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/box of 9 glass balls.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Box of 9 glass balls </h4>
-        <p>€ 39,99</p>
-      </div>
+    <div class="product">
+        <img src="FrontImg.html/box of 9 glass balls.jpg" alt="">
+        <div class="product-text">
+            <h4>Box of 9 glass balls</h4>
+            <p>€ 39,99</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/fluffy cushion with embroidery 45x45cm.jpg" alt="">
-      <div class="product-text">
-        <h5>NEw</h5>
-      </div>
-      <div class="price">
-        <h4>Fluffy cushion whith embroidery </h4>
-        <p>€ 34,00</p>
-      </div>
+    <div class="product">
+        <img src="FrontImg.html/fluffy cushion with embroidery 45x45cm.jpg" alt="">
+        <div class="product-text">
+            <h4>Fluffy cushion embroidery</h4>
+            <p>€ 34,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/Warm fabric cushion 45x45cm.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Warm fabric cushion</h4>
-        <p>€ 34,00</p>
-      </div>
+    <div class="product">
+        <img src="FrontImg.html/Warm fabric cushion 45x45cm.jpg" alt="">
+        <div class="product-text">
+            <h4>Warm fabric cushion</h4>
+            <p>€ 34,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/Jacquard knitted cushion 40x60cm.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Jacquard knitted cushion </h4>
-        <p>€ 34,00</p>
-      </div>
+    <div class="product">
+        <img src="FrontImg.html/Jacquard knitted cushion 40x60cm.jpg" alt="">
+        <div class="product-text">
+            <h4>Jacquard knitted cushion</h4>
+            <p>€ 34,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/Jacquard knitted cushion 45x45cm.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Jacquard knitted cushion </h4>
-        <p>€ 34,00</p>
-      </div>
+    <div class="product">
+        <img src="FrontImg.html/jacquard knitted cushion with writing 40x46cm.jpg" alt="">
+        <div class="product-text">
+            <h4>Jacquard knitted cushion</h4>
+            <p>€ 34,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/jacquard knitted cushion with writing 40x46cm.jpg" alt="">
-      <div class="product-text">
-        <h5>NEw</h5>
-      </div>
-      <div class="price">
-        <h4>Jacquard knitted cushion with writing </h4>
-        <p>€ 34,00</p>
-      </div>
+    <div class="product">
+        <img src="FrontImg.html/teddy fabric chushion with embroidery 45x45cm.jpg" alt="">
+        <div class="product-text">
+            <h4>Teddy embroidery cushion </h4>
+            <p>€ 34,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/teddy fabric chushion with embroidery 45x45cm.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Teddy fabric chushion with embroidery </h4>
-        <p>€ 32,90</p>
-      </div>
+    <div class="product">
+        <img src="FrontImg.html/christmas tree velvet cushion.jpg" alt="">
+        <div class="product-text">
+            <h4>Christmas tree cushion</h4>
+            <p>€ 34,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/christmas tree velvet cushion.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Christmas tree velvet cushion </h4>
-        <p>€ 25,90</p>
-      </div>
+    <div class="product">
+    <img src="FrontImg.html/Embroidered sherpa fabric cushion 45x45cm.jpg" alt="">
+        <div class="product-text">
+            <h4>Embroide sherpa cushion</h4>
+            <p>€ 34,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/Embroidered sherpa fabric cushion 45x45cm.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Embroidered sherpa fabric cushion </h4>
-        <p>€ 36,90</p>
-      </div>
+    <div class="product">
+    <img src="FrontImg.html/candle in a star-shaped container.jpg" alt="">
+        <div class="product-text">
+            <h4>Star-shaped Candle</h4>
+            <p>€ 16,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/candle in a star-shaped container.jpg" alt="">
-      <div class="product-text">
-        <h5>NEw</h5>
-      </div>
-      <div class="price">
-        <h4>candle in a star-shaped container </h4>
-        <p>€ 16,00</p>
-      </div>
+    <div class="product">
+    <img src="FrontImg.html/muffin candle handcrafted.jpg" alt="">
+        <div class="product-text">
+            <h4>Muffin candle handcrafted</h4>
+            <p>€ 19,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/candle in star-shaped glass container.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Candle in a star-shaped container </h4>
-        <p>€ 16,90</p>
-      </div>
+    <div class="product">
+    <img src="FrontImg.html/candle in star-shaped glass container.jpg" alt="">
+        <div class="product-text">
+          <h4>Star-shaped Candle</h4>
+          <p>€ 16,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/muffin candle handcrafted.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Muffin candle handcrafted</h4>
-        <p>€ 19,90</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/decorated candle.jpg" alt="">
-      <div class="product-text">
-        <h5>NEw</h5>
-      </div>
-      <div class="price">
+    <div class="product">
+    <img src="FrontImg.html/decorated candle.jpg" alt="">
+        <div class="product-text">
         <h4>Decorated candle</h4>
         <p>€ 12,00</p>
-      </div>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/decoration candle.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Decoration candle</h4>
-        <p>€ 12,00 </p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/christmas tree candle.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
+    <div class="product">
+    <img src="FrontImg.html/christmas tree candle.jpg" alt="">
+        <div class="product-text">
         <h4>christmas tree candle </h4>
         <p>€ 20,00</p>
-      </div>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/christmas tree candle2.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Christmas tree candle</h4>
-        <p>€ 20,00</p>
-      </div>
+    <div class="product">
+    <img src="FrontImg.html/mouth blown glass sphere hand colored by european artisans.jpg" alt="">
+        <div class="product-text">
+            <h4>Mouth blown glass sphere</h4>
+            <p>€ 28,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/set of 2 lacquered wax candles.jpg" alt="">
-      <div class="product-text">
-        <h5>NEw</h5>
-      </div>
-      <div class="price">
-        <h4>Set of 2 lacquered wax candles</h4>
-        <p>€ 15,90</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/set of 6 Christmas tree candles.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Set of 6 lacquered wax candles</h4>
-        <p>€ 15,90</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/mouth blown glass sphere hand colored by european artisans.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Mouth blown glass sphere hand colored by european artisans</h4>
-        <p>€ 19,00 </p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/decorative sequin bow.jpg" alt="">
-      <div class="product-text">
-        <h5>NEw</h5>
-      </div>
-      <div class="price">
-        <h4>Decorative sequin bow</h4>
-        <p>€ 10,90</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/decorative velvet bow.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
+    <div class="product">
+    <img src="FrontImg.html/decorative velvet bow.jpg" alt="">
+        <div class="product-text">
         <h4>Decorative velvet bow</h4>
         <p>€ 10,90</p>
-      </div>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/set of three velvet effect boxes.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Set of three velvet effect boxes</h4>
-        <p>€ 34,00</p>
-      </div>
+    <div class="product">
+    <img src="FrontImg.html/decorative wreath with berries and pine cones.jpg" alt="">
+        <div class="product-text">
+          <h4>Decorative wreath </h4>
+          <p>€ 16,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/decorative wreath with berries and pine cones.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Decorative wreath with berries and pine cones</h4>
-        <p>€ 34,00</p>
-      </div>
+    <div class="product">
+    <img src="FrontImg.html/decorative wreath with berries.jpg" alt="">
+        <div class="product-text">
+        <h4>Decorative wreath </h4>
+        <p>€ 20,00</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/decorative wreath with berries.jpg" alt="">
-      <div class="product-text">
-        <h5>NEw</h5>
-      </div>
-      <div class="price">
-        <h4>decorative wreath with berries</h4>
-        <p>€ 54,90</p>
-      </div>
+    <div class="product">
+    <img src="FrontImg.html/christmas embroidery cotton tablecloth.jpg" alt="">
+        <div class="product-text">
+        <h4>Christmas cotton tablecloth</h4>
+        <p>€ 49,90</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
     </div>
 
-    <div class="row">
-      <img src="FrontImg.html/decorative wreath with pine branches and pine cones.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Decorative wreath with pine branches and pine cones</h4>
-        <p>€ 59,90</p>
-      </div>
-    </div>
 
-    <div class="row">
-      <img src="FrontImg.html/decorative wreath with pines.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Decorative wreath with pines</h4>
-        <p>€ 55,90</p>
-      </div>
-    </div>
 
-    <div class="row">
-      <img src="FrontImg.html/vintage christmas ceramic plate.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Vintage christmas ceramic plate</h4>
-        <p>€ 24,90</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/christmas poinsettia servin plate.jpg" alt="">
-      <div class="product-text">
-        <h5>NEw</h5>
-      </div>
-      <div class="price">
-        <h4>Christmas poinsettia servin plate</h4>
-        <p>€ 15,90 </p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/decorative wooden reindeer.jpg" alt="">
-      <div class="product-text">
-        <h5> NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Decorative wooden reindeer</h4>
-        <p>€ 20,90</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/cotton tablecloth with embroidery.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>Cotton tablecloth with embroidery</h4>
-        <p>€ 45,90</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <img src="FrontImg.html/christmas embroidery cotton tablecloth.jpg" alt="">
-      <div class="product-text">
-        <h5>NEW</h5>
-      </div>
-      <div class="price">
-        <h4>christmas embroidery cotton tablecloth</h4>
-        <p>€ 45,90</p>
-      </div>
-    </div>
-
-  </div>
 
 </section>
+</section>
+
+<footer>
+  <div class="footer-content">
+      <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+      <ul class="footer-links">
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
+      </ul>
+  </div>
+</footer>
 
 
 
