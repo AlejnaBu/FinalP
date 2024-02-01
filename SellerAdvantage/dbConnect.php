@@ -1,12 +1,16 @@
 <?php
-class dbConnect {
-    // private $conn = null;
-    private $host = 'localhost';
-    private $dbname = 'databaza';
-    private $username = 'root';
-    private $password = '';
+class DbConnect {
+    private $conn;
 
-    public function connectDB() {
+    public function __construct() {
+        $this->conn = null;
+        $this->host = 'localhost';
+        $this->dbname = 'databaza';
+        $this->username = 'root';
+        $this->password = '';
+    }
+
+    public function getConnection() {
         try {
             $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -17,3 +21,4 @@ class dbConnect {
         return $this->conn;
     }
 }
+?>

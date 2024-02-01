@@ -1,11 +1,26 @@
- <?php
+<?php
 
 session_start();
 
-include 'dbConnect.php';
 
-$dbConnect = new dbConnect();
-$data = $dbConnect->connectDB();
+
+if (!isset($_SESSION['username']) || $_SESSION['usertype'] !== 'admin') {
+    header("location: LogIn.php");
+    exit();
+}
+
+include 'dbConnect.php';
+include 'UserDeletion.php';
+include 'UserUpdate.php';
+
+$dbConnect = new DbConnect();
+$data = $dbConnect->getConnection();
+
+// Create instances of UserDeletion and UserUpdate classes
+$userDeletion = new UserDeletion($data);
+$userUpdate = new UserUpdate($data);
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
@@ -14,57 +29,83 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST["new_password"];
         $email = $_POST["new_email"];
 
-        
         $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
         $stmt = $data->prepare($sql);
 
         if ($stmt->execute([$username, $password, $email])) {
-           
             echo '<script>alert("User registration successful");</script>';
         } else {
-           
             echo "Error: " . $stmt->errorInfo()[2];
         }
     }
-}
 
+    $sql = "SELECT * FROM users";
+    $result = $data->query($sql);
 
+    if (!$result) {
+        die("SQL query failed: " . $data->errorInfo()[2]);
+    }
 
+    // DELETE - Delete a user
+    if (isset($_POST["delete_user"])) {
+       $userDeletion->deleteUser($_POST["delete_user_id"]);
+     }
 
-$sql = "SELECT * FROM users";
-$result = $data->query($sql);
+    // Handle Update Form Submission
+if (isset($_POST["update_user"])) {
+    $user_id = $_POST["update_user_id"];
+    $userDetails = $userUpdate->getUserDetails($user_id);
 
-if (!$result) {
-    die("SQL query failed: " . $data->errorInfo()[2]);
-}
+    if ($userDetails !== null) {
+        ?>
+            <div class="update">
+        <h2>Update User</h2>
+        <form action="" method="post">
+            <input type="hidden" name="user_id" value="<?= $userDetails['id']; ?>">
+            
+            <label for="update_username">Username:</label>
+            <input type="text" id="update_username" name="update_username" placeholder="Username" value="<?= $userDetails['username']; ?>" required><br>
 
+            <label for="update_password">New Password (leave blank to keep current):</label>
+            <input type="password" id="update_password" name="update_password" placeholder="New Password"><br>
 
-// DELETE - Delete a user
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_user"])) {
-    $user_id = $_POST["delete_user_id"];
+            <label for="update_email">Email:</label>
+            <input type="email" id="update_email" name="update_email" placeholder="Email" value="<?= $userDetails['email']; ?>" required><br>
 
-    $sql = "DELETE FROM users WHERE id = ?";
-    $stmt = $data->prepare($sql);
-
-    if ($stmt->execute([$user_id])) {
-        echo '<script>alert("User deleted successfully");</script>';
+            <input type="submit" style="background-color: #FFD700; border: none; padding-top: 5px; padding-bottom: 5px;" name="confirm_update" value="Update User">
+        </form>
+    </div>
+<?php
     } else {
-        echo "Error: " . $stmt->errorInfo()[2];
+        echo "Error fetching user details for update.";
     }
 }
 
+    // Handle Confirm Update Form Submission
+    // if (isset($_POST["confirm_update"])) {
+    //     $user_id = $_POST["user_id"];
+    //     $new_username = $_POST["update_username"];
+    //     $new_password = $_POST["update_password"];
+    //     $new_email = $_POST["update_email"];
+
+    //     $sql = "UPDATE users SET username = ?, password = ?, email = ? WHERE id = ?";
+    //     $stmt = $data->prepare($sql);
+
+    //     if ($stmt->execute([$new_username, $new_password, $new_email, $user_id])) {
+    //         echo '<script>alert("User updated successfully");</script>';
+    //     } else {
+    //         echo "Error updating user: " . $stmt->errorInfo()[2];
+    //     }
+    // }
+}
+
 $sql = "SELECT * FROM users";
 $result = $data->query($sql);
 
 if (!$result) {
     die("SQL query failed: " . $data->errorInfo()[2]);
 }
-
 ?>
-
-
-
-?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,31 +114,105 @@ if (!$result) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-        body{
+        body {
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
         }
 
-        header{
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
-        header li{
-            margin-left: 7px;
-            list-style-type: none;
+        header img {
+            height: 60px;
         }
 
-        header ul  {
+        header ul {
+            list-style: none;
             display: flex;
-            justify-content: flex-end;
+            gap: 10px;
         }
 
-        .create{
-            margin-left:10px;
+        header li a {
+            text-decoration: none;
+            color: white;
         }
 
-   
+        h1 {
+            color: orange;
+            margin-top: 20px;
+        }
+
+        .div {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        .update {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .update form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #FFD700;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        button.delete-btn,
+        button.update-btn {
+            background-color: #20B2AA;
+            border: none;
+            width: 60px;
+            padding: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        button.update-btn {
+            background-color: #FFD700;
+        }
+
     </style>
 </head>
 <body>  
@@ -109,18 +224,12 @@ if (!$result) {
     <ul>
         <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
         <li><a style="text-decoration: none; color: black;" href="SignUp.php"></a>SignUp</li>
-        <li><a style="text-decoration: none; color: black;" href="ContactUs.php">Contact</a></li>
+        <li><a style="text-decoration: none; color: black;" href="contact.php">Contact</a></li>
         <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
     </ul>
 </header>
 
-<h1>Welcome, Admin!</h1>
-
-
-
-
-
-
+<h1 style=color:orange;;>Welcome, Admin!</h1>
 
 <?php
 // Additional debugging statements
@@ -132,6 +241,7 @@ if ($result !== null) {
     $rows = $result->fetchAll(PDO::FETCH_ASSOC);
     if (count($rows) > 0) {
         ?>
+        <div class="div">
         <table>
             <thead>
             <tr>
@@ -154,7 +264,11 @@ if ($result !== null) {
                     <td>
                         <form action="" method="post">
                             <input type="hidden" name="delete_user_id" value="<?= $row['id']; ?>">
-                            <button type="submit" name="delete_user" class="delete-btn">Delete</button>
+                            <button style="background-color:#20B2AA; border:none; width:60px; padding-top:5px; padding-bottom:5px;" type="submit" name="delete_user" class="delete-btn">Delete</button>
+                        </form>
+                        <form action="" method="post">
+                            <input type="hidden" name="update_user_id" value="<?= $row['id']; ?>">
+                            <button style="background-color: #FFD700; border: none; width: 60px; padding-top: 5px; padding-bottom: 5px;" type="submit" name="update_user" class="update-btn">Update</button>
                         </form>
                     </td>
                 </tr>
@@ -170,7 +284,7 @@ if ($result !== null) {
 }
 ?>
 
-<div class="create">
+<!-- <div class="create">
     <h2>Create a New User</h2>
     <form action="" method="post">
         <label for="new_username"></label>
@@ -185,11 +299,13 @@ if ($result !== null) {
         <input style="padding:5px; margin-bottom: 5px;" type="email" id="new_email" name="new_email"
                placeholder="Email" required><br>
 
-        <input type="submit" name="create_user" value="Create User">
+        <input style="background-color:#20B2AA;border:none;padding-top:5px;padding-bottom:5px;; type="submit" name="create_user" value="Create User">
     </form>
-</div>
+</div> -->
 
-<p><a href="logout.php">Logout</a></p>
+<!-- <p><a href="logout.php">Logout</a></p> -->
+<p><a href="CreateUser.php">CreateUser</a></p>
+<p><a href="adminMessages.php">Get Messages</a></p>
 
 </body>
 </html>
