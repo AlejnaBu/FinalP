@@ -6,9 +6,9 @@ include 'DbConnect.php';
 $dbConnect = new DbConnect();
 $data = $dbConnect->getConnection();
 
-$messageHandler = new MessageHandler($data); // Use $data instead of $db
+$messageHandler = new MessageHandler($data); 
 
-// Get messages
+
 $messages = $messageHandler->getMessages();
 ?>
 
@@ -30,6 +30,10 @@ $messages = $messageHandler->getMessages();
             height: 100vh;
         }
 
+       
+
+       
+
         h2 {
             color: #20B2AA;
             text-align: center;
@@ -39,7 +43,7 @@ $messages = $messageHandler->getMessages();
             width: 80%;
             margin-top: 20px;
             border-collapse: collapse;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           
         }
 
         th, td {
@@ -49,14 +53,23 @@ $messages = $messageHandler->getMessages();
         }
 
         th {
-            background-color: #20B2AA;
+            background-color: #DEB887;
             color: white;
         }
     </style>
 </head>
 <body>
+<div class="headeri">
+        <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
+    </div>
+    <ul>
+        <li><a style="text-decoration: none; color: black;" href="adminDashboard.php">Dashboard</a></li>
+        <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log In</a></li>
+        <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
+    </ul>
+</header>
 
-<h2>Admin Messages</h2>
+<!-- <h2>Admin Messages</h2> -->
 
 <table border="1">
     <tr>

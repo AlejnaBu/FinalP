@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-include 'dbConnect.php';  // Include your database connection file
-include 'UserManager.php'; // Include your UserManager class file
+include 'dbConnect.php'; 
+include 'UserManager.php'; 
 
 class CreateUserPage
 {
@@ -32,9 +32,7 @@ class CreateUserPage
 
     public function render()
     {
-        // Include any necessary CSS or JavaScript files here
-
-        // HTML for the user creation form
+        
         ?>
         <!DOCTYPE html>
         <html lang="en">
@@ -42,7 +40,7 @@ class CreateUserPage
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Create User</title>
-            <!-- Add any necessary styles or scripts here -->
+            
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -55,16 +53,44 @@ class CreateUserPage
                     height: 100vh;
                 }
 
-                h1 {
+                header {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  padding: 10px; /* Adjust padding as needed */
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+              }
+
+             header img {
+                height: 60px;
+             }
+
+            header ul {
+              list-style: none;
+              display: flex;
+              gap: 10px;
+              
+           }
+
+           header li a {
+             text-decoration: none;
+             color: white;
+           }
+
+
+                /* h1 {
                     color: #20B2AA;
-                    text-align: center;
-                }
+                    text-align: top;
+                } */
 
                 form {
                     max-width: 300px;
                     padding: 20px;
                     background-color: #fff;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                   
                 }
 
                 label {
@@ -80,7 +106,7 @@ class CreateUserPage
                 }
 
                 input[type="submit"] {
-                    background-color: #20B2AA;
+                    background-color: #DED887;
                     color: white;
                     border: none;
                     padding: 8px;
@@ -90,7 +116,17 @@ class CreateUserPage
                 </style>
         </head>
         <body>
-            <h1>Create a New User</h1>
+        <header>
+    <div class="headeri">
+        <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
+    </div>
+    <ul>
+        <li><a style="text-decoration: none; color: black;" href="adminDashboard.php">Dashboard</a></li>
+        <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log In</a></li>
+        <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
+    </ul>
+</header>
+            <!-- <h1>Create a New User</h1><br> -->
 
             <form action="" method="post">
                 <label for="new_username">Username:</label>
@@ -105,7 +141,7 @@ class CreateUserPage
                 <input type="submit" name="create_user" value="Create User">
             </form>
 
-            <!-- Add any additional HTML or content here -->
+           
 
         </body>
         </html>
@@ -113,12 +149,12 @@ class CreateUserPage
     }
 }
 
-// Instantiate the UserManager and CreateUserPage
+
 $dbConnect = new DbConnect();
 $userManager = new UserManager($dbConnect);
 $createUserPage = new CreateUserPage($userManager);
 
-// Call methods to handle user creation and render the page
+
 $createUserPage->handleUserCreation();
 $createUserPage->render();
 

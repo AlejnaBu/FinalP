@@ -16,20 +16,39 @@
         }
         /* Kodi per Header */
 
-        header{
-            display: flex;
-            justify-content: space-between;
-        }
+        header {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         z-index: 1000;
+         background-color: transparent; 
+     }
 
-        header li{
-        margin-left: 7px;
-        list-style-type: none;
-        }
+      header .headeri {
+         padding: 10px; 
+     }
 
-        header ul  {
+     header ul {
         display: flex;
         justify-content: flex-end;
-        }
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size:20px;
+        margin-top: 10px;
+     }
+
+    header li {
+        margin: 0 15px;
+    }
+
+    header a {
+       text-decoration: none;
+       color: black;
+    }
 
  
 
@@ -295,6 +314,7 @@ img {vertical-align: middle;}
       .container3 img {
           width: 100%;
           height: 500px;
+          border-radius:10px;
    
          }
         
@@ -314,8 +334,8 @@ img {vertical-align: middle;}
 
     /* Kodi per footer */
          footer{
-           color: white;
-           background-color: black;
+          background-color: #DCDCDC;
+            color: black;
            width: 100%;
            /* margin-top: 80px; */
            padding-top: 70px;
@@ -332,7 +352,7 @@ img {vertical-align: middle;}
         }
 
         .f{
-          color: white;
+          color: black;
         
          } 
 
@@ -352,6 +372,46 @@ img {vertical-align: middle;}
     justify-content: space-around;
    } 
 
+       .end {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-content p {
+            margin: 0;
+            flex: 1;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .footer-links li {
+            margin: 0;
+        }
+
+        .footer-links li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-links li a:hover {
+            text-decoration: underline;
+        }
+
 
 
     </style>
@@ -364,8 +424,9 @@ img {vertical-align: middle;}
             <ul>
                 <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
                 <li><a style="text-decoration: none; color: black;" href="AboutUs.php">AboutUs</a></li>
-                <li><a style="text-decoration: none; color: black;" href="ContactUs.php">Contact</a></li>
+                <li><a style="text-decoration: none; color: black;" href="contact.php">Contact</a></li>
                 <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
             </ul>
         </header>
         
@@ -506,9 +567,9 @@ img {vertical-align: middle;}
     <div class="container3">
                <img    src="FrontImg.html/shopimg.jpg" alt="">
                 <div class="container3Tekst">
-                <h2 style="color: #BC8F8F; text-decoration: none;" >Guess What's New On Our Decor Shop</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod cum exercitationem saepe magnam, eum suscipit. Dignissimos,
-                   </p>
+                <h2 style="color:black; text-decoration: none;" >Guess What's New On Our Decor Shop</h2>
+                <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod cum exercitationem saepe magnam, eum suscipit. Dignissimos,
+                   </p> -->
              <button style="padding: 10px; color: black; background-color: aliceblue; border: 0;"><a style="text-decoration: none; color: black;" href="Shop.php">Shop Now</a></button>
                 
 
@@ -542,6 +603,17 @@ img {vertical-align: middle;}
         </div>
         
     </footer> 
+
+    <div class="end">
+  <div class="footer-content">
+      <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+      <ul class="footer-links">
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
+      </ul>
+  </div>
+  </div>
  
 
     <script>
