@@ -54,6 +54,32 @@ header {
        text-decoration: none;
        color: black;
     }
+
+    @media only screen and (max-width: 320px) {
+    header {
+        position: static;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .headeri img {
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    header ul {
+        margin-top: 10px;
+    }
+
+    header li {
+        margin: 5px 0;
+    }
+}
+
+.contact-form {
+    height: auto;
+    margin: 40px 0 0 0;
+}
      
     .contact-form{
        /* width: 100%; */
@@ -61,149 +87,190 @@ header {
        /* border-top: 20px solid ; */
        margin: 40px 0 0 0;
     }
-.contact-form::before{
- content:"";
- display: table;
- clear: both;
-}
-.contact-form::after{
 
- content:"";
- display: table;
- clear: both;
-}
-.first{
- margin:40px 0 0 20px;    
-}
-.first::before{
- content:"";
- display: table;
- clear: both; 
-}
-.first::after{
- content:"";
- display: table;
- clear: both; 
-}
-.contact{
- width: 50%;
- float: left;
-}
-.contact-form input{
- height: 26px;
- padding-left: 9px;
+    .contact-form::before{
+       content:"";
+       display: table;
+       clear: both;
+   }
+    .contact-form::after{
+
+       content:"";
+       display: table;
+       clear: both;
+   } 
+
+    .first{
+
+       margin:40px 0 0 20px;     
+    }
+
+   .first::before{
+
+      content:"";
+      display: table;
+      clear: both; 
+   }
+
+   .first::after{
+
+      content:"";
+      display: table;
+      clear: both;
+
+    }
+   .contact{
+     width: 50%;
+     float: left;
+   }
+
+  .contact-form input{
+    height: 26px;
+    padding-left: 9px;
  
-}
-.contact *{
- font-family: Verdana;
- font-weight: 500;
-}
-.contact::before{
- content:"";
- display: table;
- clear: both;
-}
-.contact::after{
- content:"";
- display: table;
- clear: both;
-}
-.contact input[type="text"]:nth-child(2){
- width: 45%;
- /* float: left; */
- background: #1c1c1c;
- border: transparent;
- color: #cccccc;
- text-align:center;
-}
-/* .contact input[type="text"]:nth-child(4){
- display: inherit;
- width: 90%;
- margin-bottom: 10px;
- background: #1c1c1c;
- border: transparent;
- color: #cccccc;
-} */
-.contact input[type="email"]{
- width: 45%;
- /* float: left; */
- margin-top:5px;
- /* margin-left: 10px; */
- margin-bottom: 10px;
- background: #1c1c1c;
- border: transparent;
- color: #cccccc;
- text-align:center;
-}
-.contact textarea{
- display: inherit;
- width: 90%;
- height: 60px;
- background: #1c1c1c;
- border: transparent;
- resize: unset;
- color: #cccccc;
- padding-left: 9px;
- text-align:center;
+  }
 
-}.contact input[type="submit"]{
- background: #333333;
- border: transparent;
- height: 30px;
- margin-top: 10px;
- color: #cccccc;
- width: 100px;
- cursor: pointer;
-}
+  .contact *{
 
-::placeholder {
- color: #cccccc;
- opacity: 1; 
-}
-.contact form{
- margin: 0;
- float: left;
-}
+   font-family: Verdana;
+   font-weight: 500;
+
+  }
+
+  .contact::before{
+
+    content:"";
+    display: table;
+    clear: both;
+
+  }
+  .contact::after{
+   content:"";
+   display: table;
+   clear: both;
+  }
+   .contact input[type="text"]:nth-child(2){
+    width: 45%;
+    /* float: left; */
+    background: #1c1c1c;
+    border: transparent;
+    color: #cccccc;
+    text-align:center;
+  }
+
+   .contact input[type="email"]{
+
+     width: 45%;
+     /* float: left; */
+     margin-top:5px;
+     /* margin-left: 10px; */
+     margin-bottom: 10px;
+     background: #1c1c1c;
+     border: transparent;
+     color: #cccccc;
+     text-align:center;
+
+    }
+
+   .contact textarea{
+     display: inherit;
+     width: 90%;
+     height: 60px;
+     background: #1c1c1c;
+     border: transparent;
+     resize: unset;
+     color: #cccccc;
+     padding-left: 9px;
+     text-align:center;
+
+   }
+   .contact input[type="submit"]{
+
+      background: #333333;
+      border: transparent;
+      height: 30px;
+      margin-top: 10px;
+      color: #cccccc;
+      width: 100px;
+      cursor: pointer;
+
+  }
+
+  ::placeholder {
+
+     color: #cccccc;
+     opacity: 1; 
+
+   }
+
+  .contact form{
+
+    margin: 0;
+    float: left;
+
+  }
 .contact form h1{
- font-size: 20px;
- font-family: Georgia;
- font-style: italic;
- color: #cccccc;
- text-transform: capitalize;
-}
 
-.contact div{
- float: left;
- width: 90%;
-}
-.contact div input{
- float: right;
-}
-.link-blog{
- width: 50%;
- float: left;
-}
-.link-blog::before{
- content:"";
- display: table;
- clear: both;
-}
-.link-blog::after{
- content:"";
- display: table;
- clear: both;
-}
-.link-blog div{
- width: 33.3%;
- float: left;
-}
-.link-blog div h1{
- font-size: 20px;
- font-family: Georgia;
- font-style: italic;
- color:white;
- font-weight: 500;
- margin-bottom: 21px;
+    font-size: 20px;
+    font-family: Georgia;
+    font-style: italic;
+    color: #cccccc;
+    text-transform: capitalize;
+
+ }
+
+  .contact div{
+
+    float: left;
+    width: 90%;
+
+   }
+
+  .contact div input{
+
+    float: right;
+
+   }
+
+  .link-blog{
+
+   width: 50%;
+   float: left;
+
+  }
+
+   .link-blog::before{
+
+    content:"";
+    display: table;
+    clear: both;
+
+  }
+
+   .link-blog::after{
+
+     content:"";
+     display: table;
+     clear: both;
+
+  }
+
+  .link-blog div{
+
+    width: 33.3%;
+    float: left;
+
+  }
+
+  .link-blog div h1{
+
+   font-size: 20px;
+   font-family: Georgia;
+   font-style: italic;
+   color:white;
+   font-weight: 500;
+   margin-bottom: 21px;
+
 }
 .link-blog div h3{
  font-size: 13px;
@@ -297,6 +364,36 @@ header {
  font-family: Georgia;
  font-weight: 500;
  font-size: 13px;
+}
+
+/* Additional Styles for Smaller Screens */
+@media only screen and (max-width: 320px) {
+    header ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header li {
+        margin: 5px 0;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea,
+    .contact-form input[type="submit"] {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .link-blog div,
+    .blog-posts,
+    .details,
+    .our-details {
+        width: 100%;
+        float: none;
+        margin-bottom: 20px;
+    }
 }
 
 

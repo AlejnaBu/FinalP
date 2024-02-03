@@ -82,6 +82,28 @@ body{
        text-decoration: none;
        color: black;
     }
+
+    
+    @media only screen and (max-width: 320px) {
+    header {
+        position: static;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .headeri img {
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    header ul {
+        margin-top: 10px;
+    }
+
+    header li {
+        margin: 5px 0;
+    }
+}
  
  .container{
      width: 100%;
