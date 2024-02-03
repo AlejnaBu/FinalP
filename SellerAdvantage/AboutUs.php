@@ -1,3 +1,16 @@
+<?php
+include 'dbConnect.php';
+
+$dbConnect = new DbConnect();
+$data = $dbConnect->getConnection();
+
+$sql = "SELECT * FROM staff";
+$result = $data->query($sql);
+
+if (!$result) {
+    die("SQL query failed: " . $data->errorInfo()[2]);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -236,10 +249,11 @@
         <img src="FrontImg.html/Logo.png" height="90px" alt="logo">
     </div>
     <ul>
-        <li><a style="text-decoration: none; color: black;" href="FrontPage.html">Home</a></li>
+        <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
         <li>About Us</li>
-        <li><a style="text-decoration: none; color: black;" href="ContactUs.html">Contact</a></li>
-        <li><a style="text-decoration: none; color: black;" href="LogIn.html">Log in</a></li>
+        <li><a style="text-decoration: none; color: black;" href="contact.php">Contact</a></li>
+        <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
+        <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
     </ul>
 </header>
 
@@ -249,6 +263,22 @@
             <br>
             and creativity collide!
         </h1>
+    </div>
+</section>
+
+<!-- About section -->
+<section class="about" id="about">
+    <div class="container">
+        <h1 class="heading">About Us</h1>
+        <div class="row">
+            <!-- Loop through staff members and display their information -->
+            <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
+                <div class="content">
+                    <h3><?= $row['name']; ?></h3>
+                    <p><?= $row['experiences']; ?></p>
+                </div>
+            <?php } ?>
+        </div>
     </div>
 </section>
 

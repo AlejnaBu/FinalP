@@ -5,7 +5,7 @@ class DbConnect {
     public function __construct() {
         $this->conn = null;
         $this->host = 'localhost';
-        $this->dbname = 'databaza';
+        $this->dbname = 'databaza'; // Update to your database name
         $this->username = 'root';
         $this->password = '';
     }
