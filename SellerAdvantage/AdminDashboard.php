@@ -256,7 +256,6 @@ if (!$result) {
 
 <h1 style=color:orange;;>Welcome, Admin!</h1>
 
-<<<<<<< HEAD
 <!-- Add New Staff Member Section -->
 <section class="add-staff">
     <h2>Add New Staff Member</h2>
@@ -270,11 +269,9 @@ if (!$result) {
         <input type="submit" name="create_staff" value="Add Staff Member">
     </form>
 </section>
-=======
 <p><a style="text-decoration:none;color:black;margin-left:20px;" href="CreateUser.php">CreateUser</a></p>
 <p><a style="text-decoration:none;color:black;margin-left:20px;" href="adminMessages.php">Get Messages</a></p>
 
->>>>>>> c4d094f345407fcadc454c40de1c19d2b42de109
 
 <?php
 // Additional debugging statements

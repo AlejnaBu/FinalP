@@ -61,51 +61,35 @@ if (!$result) {
        color: black;
     }
 
-/* Container styles */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+    .row {
+        display: flex;
+        justify-content: space-around; 
+        flex-wrap: wrap; 
+    }
 
-/* Heading styles */
-.heading {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 36px;
-}
+    .content {
+        width: 30%; 
+        margin-bottom: 20px; 
+    }
 
-/* Staff content styles */
-.content {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+       
+    @media (max-width: 768px) {
+        .content {
+            width: 45%; 
+        }
+    }
 
-/* Staff name styles */
-.content h3 {
-    margin-top: 0;
-    font-size: 24px;
-    color: #333;
-}
-
-/* Staff experiences styles */
-.content p {
-    margin-bottom: 0;
-    color: #666;
-    line-height: 1.6;
-}
+    @media (max-width: 576px) {
+        .content {
+            width: 100%; 
+        }
+    }
 
 
 
 
 
-
-
-
-
+    
         /* pjesa e pare e about us */
 
         section {
@@ -143,6 +127,32 @@ if (!$result) {
         }
      
      
+        @media (max-width: 600px) {
+    section {
+        padding: 5% 5%; 
+    }
+
+    .main-home {
+        height: 200px; 
+        background-size: contain; 
+        text-align: center; 
+    }
+
+    .main-text h1 {
+        font-size: 40px; 
+    }
+
+    .heading {
+        font-size: 40px; 
+    }
+
+    .content {
+        min-width: 100%; 
+        max-width: 100%; 
+        margin-right: 0; 
+    }
+}
+
      /* About section */
  .about {
    background-color: #f9f9f9;
@@ -202,46 +212,46 @@ if (!$result) {
 }
 
 .customers .heading h2 {
-    font-size: 50px; /* Adjusted font size for heading */
-    text-align: center; /* Centered heading */
-    margin-bottom: 30px; /* Added margin for spacing */
+    font-size: 50px; 
+    text-align: center; 
+    margin-bottom: 30px; 
 }
 
 .customers-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Changed grid layout for responsiveness */
-    gap: 20px; /* Increased gap between customer boxes */
-    justify-content: center; /* Centered customer boxes */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px; 
+    justify-content: center;
 }
 
 .customers-container .box {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    background-color: #fff; /* Added white background to customer boxes */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
-    transition: all 0.3s ease; /* Smooth transition on hover */
+    background-color: #fff; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease; 
 }
 
 .customers-container .box:hover {
-    transform: translateY(-5px); /* Added slight lift on hover */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced box shadow on hover */
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
 }
 
 .stars .bx {
-    color: #FFD700; /* Changed star color to gold */
+    color: #FFD700; 
 }
 
 .customers-container .box p {
-    font-size: 18px; /* Reduced font size for customer feedback */
-    color: #666; /* Adjusted text color */
-    margin-bottom: 20px; /* Added margin for spacing */
+    font-size: 18px; 
+    color: #666; 
+    margin-bottom: 20px;
 }
 
 .customers-container .box h2 {
-    font-size: 24px; /* Adjusted font size for customer name */
-    color: #333; /* Adjusted text color */
-    margin-bottom: 10px; /* Added margin for spacing */
+    font-size: 24px; 
+    color: #333; 
+    margin-bottom: 10px; 
 }
 
 .customers-container .box img {
@@ -249,7 +259,7 @@ if (!$result) {
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 20px; /* Added margin for spacing */
+    margin-bottom: 20px; 
 }
 
 
@@ -312,7 +322,7 @@ if (!$result) {
     </div>
     <ul>
         <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
-        <li>About Us</li>
+        <li><a style="text-decoration: none; color: black;" href=" AboutUs.php">About Us</a></li>
         <li><a style="text-decoration: none; color: black;" href="contact.php">Contact</a></li>
         <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
         <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
@@ -343,6 +353,7 @@ if (!$result) {
         </div>
     </div>
 </section>
+
 
 <!-- About Us-->
 

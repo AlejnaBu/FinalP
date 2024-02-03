@@ -1,26 +1,4 @@
-<?php
-// shop.php
 
-// Include the necessary files
-require_once 'DbConnect.php';
-require_once 'Cart.php';
-
-// Start the session
-
-
-// Check if the user is logged in as admin
-if ($_SESSION['usertype'] === 'admin') {
-    // Show admin dashboard
-    echo "<h1>Welcome Admin!</h1>";
-    // Add functionality for admin dashboard here
-} else {
-    // Regular user interface
-    // HTML code for your shop page goes here
-
-    // Example button to add products to cart
-    echo "<button class='add-to-cart'>Add to Cart</button>";
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,23 +12,63 @@ if ($_SESSION['usertype'] === 'admin') {
            
             
         }
-        header{
-            display: flex;
-            justify-content: space-between;
-            
-        }
-        header li{
-          padding: 15px;
-        margin-left: 15px;
-        list-style-type: none;
+        header {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         z-index: 1000;
+         background-color: transparent; 
+     }
 
-   }
-        header ul  {
+      header .headeri {
+         padding: 10px; 
+     }
+
+     header ul {
         display: flex;
         justify-content: flex-end;
-        font-size: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size:20px;
+        margin-top: 10px;
+     }
 
-  }
+    header li {
+        margin: 0 15px;
+    }
+
+    header a {
+       text-decoration: none;
+       color: black;
+    }
+
+/* Responsive  */
+@media only screen and (max-width: 320px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header .headeri {
+        padding: 5px; 
+    }
+
+    header ul {
+        justify-content: center;
+        margin-top: 5px; 
+    }
+
+    header li {
+        margin: 5px; 
+    }
+}
+
+
+  
 section{
   padding:5% 10%;
 
@@ -123,6 +141,21 @@ section{
             background-color: #45a049;
         }
  
+/* Responsive  */
+@media only screen and (max-width: 320px) {
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .product {
+        width: 45%; /* Adjust the width as needed */
+        margin: 10px; /* Add some space between products */
+    }
+}
+
+
 
 /* add to cart */ 
 
@@ -184,6 +217,23 @@ body {
         .footer-links li a:hover {
             text-decoration: underline;
         }
+/* Responsive  */
+@media only screen and (max-width: 320px) {
+    .footer-content {
+        text-align: center;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px; /* Add some space between links */
+    }
+
+    .footer-links li {
+        margin: 5px 0;
+    }
+}
 
 
 
@@ -207,11 +257,11 @@ body {
             <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
         </div>
         <ul>
-            <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
-            <li><a style="text-decoration: none; color: black;" href="AboutUs.php">About Us</a></li>
-            <li><a style="text-decoration: none; color: black;" href="ContactUs.php">Contact</a></li>
-            <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
-
+                <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
+                <li><a style="text-decoration: none; color: black;" href="AboutUs.php">AboutUs</a></li>
+                <li><a style="text-decoration: none; color: black;" href="contact.php">Contact</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
 
         </ul>
     </header>

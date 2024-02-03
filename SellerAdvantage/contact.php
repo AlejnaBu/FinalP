@@ -311,9 +311,9 @@ header {
                 <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
             </div>
             <ul>
-                <li><a style="text-decoration: none; color: black" href="FrontPage.php">Home</a></li>
+                <li><a style="text-decoration: none; color: black;" href="FrontPage.php">Home</a></li>
                 <li><a style="text-decoration: none; color: black;" href="AboutUs.php">AboutUs</a></li>
-                <li><a style="text-decoration: none; color: black;" href="#">Contact</a></li>
+                <li><a style="text-decoration: none; color: black;" href="contact.php">Contact</a></li>
                 <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
                 <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
               
