@@ -1,3 +1,26 @@
+<?php
+// shop.php
+
+// Include the necessary files
+require_once 'DbConnect.php';
+require_once 'Cart.php';
+
+// Start the session
+
+
+// Check if the user is logged in as admin
+if ($_SESSION['usertype'] === 'admin') {
+    // Show admin dashboard
+    echo "<h1>Welcome Admin!</h1>";
+    // Add functionality for admin dashboard here
+} else {
+    // Regular user interface
+    // HTML code for your shop page goes here
+
+    // Example button to add products to cart
+    echo "<button class='add-to-cart'>Add to Cart</button>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

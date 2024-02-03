@@ -23,6 +23,20 @@ $userUpdate = new UserUpdate($data);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if (isset($_POST["create_staff"])) {
+        $name = $_POST["name"];
+        $experiences = $_POST["experiences"];
+
+        $sql = "INSERT INTO staff (name, experiences) VALUES (?, ?)";
+        $stmt = $data->prepare($sql);
+
+        if ($stmt->execute([$name, $experiences])) {
+            echo '<script>alert("Staff member added successfully");</script>';
+        } else {
+            echo "Error: " . $stmt->errorInfo()[2];
+        }
+    }
    
     if (isset($_POST["create_user"])) {
         $username = $_POST["new_username"];
@@ -242,9 +256,25 @@ if (!$result) {
 
 <h1 style=color:orange;;>Welcome, Admin!</h1>
 
+<<<<<<< HEAD
+<!-- Add New Staff Member Section -->
+<section class="add-staff">
+    <h2>Add New Staff Member</h2>
+    <form action="" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="experiences">Experiences:</label>
+        <input type="text" id="experiences" name="experiences" required><br>
+
+        <input type="submit" name="create_staff" value="Add Staff Member">
+    </form>
+</section>
+=======
 <p><a style="text-decoration:none;color:black;margin-left:20px;" href="CreateUser.php">CreateUser</a></p>
 <p><a style="text-decoration:none;color:black;margin-left:20px;" href="adminMessages.php">Get Messages</a></p>
 
+>>>>>>> c4d094f345407fcadc454c40de1c19d2b42de109
 
 <?php
 // Additional debugging statements

@@ -376,32 +376,58 @@ img {
 
 
         .container3 {
-          margin-top:100px;
-          position: relative;
-          display: flex;
-          justify-content: flex-end;
-     }
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+}
 
-      .container3 img {
-          width: 100%;
-          height: 500px;
-          border-radius:10px;
-   
-         }
-        
-        .container3Tekst{
-          position: absolute;
-          top: 50%;
-          right: 40%; 
-          transform: translateY(-50%);
-          max-width: 300px; 
-          color: black;
-          text-align: center; 
-          font-family: cursive;
-          font-style: italic;
-          
-    
-        }
+.container3Tekst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    text-align: center;
+}
+
+.container3Tekst h2 {
+    color: #BC8F8F;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.container3Tekst p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.container3Tekst button {
+    padding: 10px 20px;
+    color: white;
+    background-color: #BC8F8F;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.container3Tekst button a {
+    text-decoration: none;
+    color: white;
+}
+
+.container3 img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+ 
+}
+
 
     /* Kodi per footer */
          footer{
@@ -656,16 +682,14 @@ img {
 
 
     <div class="container3">
-               <img    src="FrontImg.html/shopimg.jpg" alt="">
-                <div class="container3Tekst">
-                <h2 style="color:black; text-decoration: none;" >Guess What's New On Our Decor Shop</h2>
-                <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod cum exercitationem saepe magnam, eum suscipit. Dignissimos,
-                   </p> -->
-             <button style="padding: 10px; color: black; background-color: aliceblue; border: 0;"><a style="text-decoration: none; color: black;" href="Shop.php">Shop Now</a></button>
-                
+    <div class="container3Tekst">
+        <h2>Guess What's New On Our Decor Shop</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod cum exercitationem saepe magnam, eum suscipit. Dignissimos.</p>
+        <button><a href="Shop.php">Shop Now</a></button>
+    </div> 
+    <img src="FrontImg.html/FrontP4.jpg" alt="Front Image">
+  </div>
 
-            </div> 
-    </div>
 
      <footer>
         <div class="f">
