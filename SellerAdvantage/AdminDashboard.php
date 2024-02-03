@@ -23,20 +23,6 @@ $userUpdate = new UserUpdate($data);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    if (isset($_POST["create_staff"])) {
-        $name = $_POST["name"];
-        $experiences = $_POST["experiences"];
-
-        $sql = "INSERT INTO staff (name, experiences) VALUES (?, ?)";
-        $stmt = $data->prepare($sql);
-
-        if ($stmt->execute([$name, $experiences])) {
-            echo '<script>alert("Staff member added successfully");</script>';
-        } else {
-            echo "Error: " . $stmt->errorInfo()[2];
-        }
-    }
    
     if (isset($_POST["create_user"])) {
         $username = $_POST["new_username"];
@@ -136,38 +122,28 @@ if (!$result) {
         }
 
         header {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         display: flex;
-         justify-content: space-between;
-         z-index: 1000;
-         background-color: transparent; 
-     }
+            /* background-color: #333; */
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-      header .headeri {
-         padding: 10px; 
-     }
+        header img {
+            height: 60px;
+        }
 
-     header ul {
-        display: flex;
-        justify-content: flex-end;
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        font-size:20px;
-        margin-top: 10px;
-     }
+        header ul {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+        }
 
-    header li {
-        margin: 0 15px;
-    }
-
-    header a {
-       text-decoration: none;
-       color: black;
-    }
+        header li a {
+            text-decoration: none;
+            color: white;
+        }
 
         h1 {
             color: orange;
@@ -269,6 +245,7 @@ if (!$result) {
         <input type="submit" name="create_staff" value="Add Staff Member">
     </form>
 </section>
+
 <p><a style="text-decoration:none;color:black;margin-left:20px;" href="CreateUser.php">CreateUser</a></p>
 <p><a style="text-decoration:none;color:black;margin-left:20px;" href="adminMessages.php">Get Messages</a></p>
 

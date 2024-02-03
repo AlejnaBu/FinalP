@@ -43,45 +43,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <style>
 
 
+
 body{
- margin: 0;
- padding: 0;
- box-sizing: border-box;
-}
-
-   header {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         display: flex;
-         justify-content: space-between;
-         z-index: 1000;
-         background-color: transparent; 
-     }
-
-      header .headeri {
-         padding: 10px; 
-     }
-
-     header ul {
-        display: flex;
-        justify-content: flex-end;
-        list-style-type: none;
         margin: 0;
         padding: 0;
-        font-size:20px;
-        margin-top: 10px;
-     }
+        /* box-sizing: border-box; */
+        }
 
-    header li {
-        margin: 0 15px;
-    }
+        body {
+    margin: 0;
+    padding: 0;
+}
 
-    header a {
-       text-decoration: none;
-       color: black;
-    }
+
  
  .container{
      width: 100%;
@@ -172,7 +146,9 @@ input{
 </style>
 <body>
 <header>
-            <div class="headeri">
+
+<form action="#" method="POST" onsubmit="return validateForm()">
+            <!-- <div class="headeri">
                 <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
             </div>
             <ul>
@@ -182,7 +158,7 @@ input{
                 <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
                 <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
             </ul>
-        </header>
+        </header> -->
 
 <div class="container">
         <div class="container-2">
@@ -214,6 +190,27 @@ input{
                     <input  type="submit" placeholder="submit" name="submit">
                  </div>
             </form>
+
+            <script>
+        function validateForm() {
+            var username = document.getElementsByName("username")[0].value;
+            var password = document.getElementsByName("password")[0].value;
+
+            if (username.length > 15) {
+                alert("Username must be 15 characters or less.");
+                return false;
+            }
+
+            if (password.length > 15) {
+                alert("Password must be 15 characters or less.");
+                return false;
+            }
+
+            // If validation passes, the form will be submitted
+            return true;
+        }
+    </script>
+</form>
         </div>
         
     </div>
