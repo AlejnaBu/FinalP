@@ -38,7 +38,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Username or password is incorrect";
     }
 }
+
+// Check if the user is already logged in and the session has expired
+if (isset($_SESSION['username']) && isset($_SESSION['login_time'])) {
+    $login_time = $_SESSION['login_time'];
+    $expiration_time = $login_time + (1 * 60 * 60) + (30 * 60); // 1 hour and 30 minutes
+
+    if (time() > $expiration_time) {
+        // Session has expired, destroy the session
+        session_unset();
+        session_destroy();
+        header("location: LogIn.php");
+        exit();
+    } else {
+        // Update the login time to extend the session
+        $_SESSION['login_time'] = time();
+    }
+}
+
+// If the user is already logged in, redirect them to the home page
+if (isset($_SESSION['username'])) {
+    header("location: FrontPage.php");
+}
 ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -57,31 +82,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        body{
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-       }
+        /* box-sizing: border-box; */
+        }
+
+       header {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         z-index: 1000;
+         background-color: transparent; 
+     }
+
+      header .headeri {
+         padding: 10px; 
+     }
+
+     header ul {
+        display: flex;
+        justify-content: flex-end;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size:20px;
+        margin-top: 10px;
+     }
+
+    header li {
+        margin: 0 15px;
+    }
+
+    header a {
+       text-decoration: none;
+       color: black;
+    }
 
     
 
-      header{
-            display: flex;
-            justify-content: space-between;
-            width: 100%; 
-           z-index: 1000; /* Bon qe pjesa e header me nejt ntop*/
-            
-        }
-        header li{
-          padding: 15px;
-          margin-left: 15px;
-          list-style-type: none;
-
-       }
-        header ul  {
-        display: flex;
-        justify-content: flex-end;
-        font-size: 20px;
-
-      }
-        
         .container{
             width: 100%;
             height: 100vh;

@@ -18,32 +18,47 @@ if (!isset($_SESSION['username'])) {
     <style>
 
 body{
- background: #292929;
-}
+    background-color: rgb(243, 243, 228);
+} 
 
-header{
-            display: flex;
-            justify-content: space-between;
-            
-        }
-        header li{
-          padding: 15px;
-        margin-left: 15px;
-        list-style-type: none;
-        
+header {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         z-index: 1000;
+         background-color: transparent; 
+     }
 
-   }
-        header ul  {
+      /* header .headeri {
+         padding: 10px; 
+     } */
+
+     header ul {
         display: flex;
         justify-content: flex-end;
-        font-size: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size:20px;
+        margin-top: 10px;
+     }
 
+    header li {
+        margin: 0 15px;
+    }
+
+    header a {
+       text-decoration: none;
+       color: black;
     }
      
     .contact-form{
-       width: 100%;
+       /* width: 100%; */
        height: auto;
-       border-top: 20px solid #5b5b5b;
+       /* border-top: 20px solid ; */
        margin: 40px 0 0 0;
     }
 .contact-form::before{
@@ -296,11 +311,11 @@ header{
                 <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
             </div>
             <ul>
-                <li><a style="text-decoration: none; color: white;" href="FrontPage.php">Home</a></li>
-                <li><a style="text-decoration: none; color: white;" href="AboutUs.php">AboutUs</a></li>
-                <li><a style="text-decoration: none; color: white;" href="ContactUs.php">Contact</a></li>
-                <li><a style="text-decoration: none; color: white;" href="LogIn.php">Log in</a></li>
-                <li><a style="text-decoration: none; color: white;" href="LogOut.php">Log Out</a></li>
+                <li><a style="text-decoration: none; color: black" href="FrontPage.php">Home</a></li>
+                <li><a style="text-decoration: none; color: black;" href="AboutUs.php">AboutUs</a></li>
+                <li><a style="text-decoration: none; color: black;" href="#">Contact</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log in</a></li>
+                <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
               
             </ul>
         </header>
@@ -319,7 +334,7 @@ header{
         <label for="message"></label>
         <textarea style="width:500px;" id="message" name="message" rows="4" placeholder="message" required></textarea><br>
 
-        <input type="submit" value="Send Message">
+        <input type="submit" value="Submit">
     </form>
         </div>
     
@@ -327,7 +342,7 @@ header{
 
     <div class="link-blog">
                 <div>
-                    <h1>Lacus interdum</h1>
+                    <h1 style="color:black;">Lacus interdum</h1>
                     <h3>>> Lorem ipsum dolor</h3>
                     <h3>>> Suspendisse in neque</h3>
                     <h3>>> Present et eros</h3>
@@ -336,7 +351,7 @@ header{
                     <h3>>> Present et eros</h3>
                 </div>
                 <div>
-                    <h1>Lacus interdum</h1>
+                    <h1 style="color:black;">Lacus interdum</h1>
                     <h3>>> Lorem ipsum dolor</h3>
                     <h3>>> Suspendisse in neque</h3>
                     <h3>>> Present et eros</h3>
@@ -345,7 +360,7 @@ header{
                     <h3>>> Present et eros</h3>
                 </div>
                 <div>
-                    <h1>Lacus interdum</h1>
+                    <h1 style="color:black;">Lacus interdum</h1>
                     <h3>>> Lorem ipsum dolor</h3>
                     <h3>>> Suspendisse in neque</h3>
                     <h3>>>Present et eros</h3>
@@ -357,7 +372,7 @@ header{
         </div>
         <div class="footer-second">
             <div class="blog-posts">
-                <h1>From The Blog</h1>
+                <h1 style="color:black;">From The Blog</h1>
                 <h2>Sednulla nam nibh a nibh eu urna facinia.</h2>
                 <p>Sednulla nam nibh a nibh eu urna facinia mauristibulus sit urna. Vitaerisus lobortis proin elit et curabituris
                     elit estibulum cursus iacus orci. Dignissimmorbi rhoncus sed netus ligula...</p>
@@ -367,7 +382,7 @@ header{
             </div>
             <div class="details">
                 <div class="our-details">
-                    <h1>Our Details</h1>
+                    <h1 style="color:black;">Our Details</h1>
                     <span>Company name</span>
                     <span>Street Name & Number</span>
                     <span>Town</span>

@@ -28,21 +28,83 @@ if (!$result) {
         }
 
         header {
-            display: flex;
-            justify-content: space-between;
-        }
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         z-index: 1000;
+         background-color: transparent; 
+     }
 
-        header li {
-            padding: 15px;
-            margin-left: 15px;
-            list-style-type: none;
-        }
+      header .headeri {
+         padding: 10px; 
+     }
 
-        header ul {
-            display: flex;
-            justify-content: flex-end;
-            font-size: 20px;
-        }
+     header ul {
+        display: flex;
+        justify-content: flex-end;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size:20px;
+        margin-top: 10px;
+     }
+
+    header li {
+        margin: 0 15px;
+    }
+
+    header a {
+       text-decoration: none;
+       color: black;
+    }
+
+/* Container styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Heading styles */
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+/* Staff content styles */
+.content {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Staff name styles */
+.content h3 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Staff experiences styles */
+.content p {
+    margin-bottom: 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+
+
+
+
+
+
+
 
         /* pjesa e pare e about us */
 
@@ -266,10 +328,10 @@ if (!$result) {
     </div>
 </section>
 
-<!-- About section -->
+<!-- About Staff -->
 <section class="about" id="about">
     <div class="container">
-        <h1 class="heading">About Us</h1>
+        <h1 class="heading">About Staff</h1>
         <div class="row">
             <!-- Loop through staff members and display their information -->
             <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>

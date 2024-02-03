@@ -136,28 +136,38 @@ if (!$result) {
         }
 
         header {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         z-index: 1000;
+         background-color: transparent; 
+     }
 
-        header img {
-            height: 60px;
-        }
+      header .headeri {
+         padding: 10px; 
+     }
 
-        header ul {
-            list-style: none;
-            display: flex;
-            gap: 10px;
-        }
+     header ul {
+        display: flex;
+        justify-content: flex-end;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size:20px;
+        margin-top: 10px;
+     }
 
-        header li a {
-            text-decoration: none;
-            color: white;
-        }
+    header li {
+        margin: 0 15px;
+    }
+
+    header a {
+       text-decoration: none;
+       color: black;
+    }
 
         h1 {
             color: orange;
@@ -170,9 +180,10 @@ if (!$result) {
         }
 
         table {
-            width: 100%;
+            width: 60%;
             border-collapse: collapse;
             margin-top: 20px;
+            margin-left:250px;
         }
 
         th, td {
@@ -182,7 +193,7 @@ if (!$result) {
         }
 
         th {
-            background-color: #333;
+            background-color:  #DED887;
             color: white;
         }
 
@@ -245,6 +256,7 @@ if (!$result) {
 
 <h1 style=color:orange;;>Welcome, Admin!</h1>
 
+<<<<<<< HEAD
 <!-- Add New Staff Member Section -->
 <section class="add-staff">
     <h2>Add New Staff Member</h2>
@@ -258,6 +270,11 @@ if (!$result) {
         <input type="submit" name="create_staff" value="Add Staff Member">
     </form>
 </section>
+=======
+<p><a style="text-decoration:none;color:black;margin-left:20px;" href="CreateUser.php">CreateUser</a></p>
+<p><a style="text-decoration:none;color:black;margin-left:20px;" href="adminMessages.php">Get Messages</a></p>
+
+>>>>>>> c4d094f345407fcadc454c40de1c19d2b42de109
 
 <?php
 // Additional debugging statements
@@ -292,11 +309,11 @@ if ($result !== null) {
                     <td>
                         <form action="" method="post">
                             <input type="hidden" name="delete_user_id" value="<?= $row['id']; ?>">
-                            <button style="background-color:#20B2AA; border:none; width:60px; padding-top:5px; padding-bottom:5px;" type="submit" name="delete_user" class="delete-btn">Delete</button>
+                            <button style="background-color:#DC143C; border:none; width:60px; padding-top:5px; padding-bottom:5px;" type="submit" name="delete_user" class="delete-btn">Delete</button>
                         </form>
                         <form action="" method="post">
                             <input type="hidden" name="update_user_id" value="<?= $row['id']; ?>">
-                            <button style="background-color: #FFD700; border: none; width: 60px; padding-top: 5px; padding-bottom: 5px;" type="submit" name="update_user" class="update-btn">Update</button>
+                            <button style="background-color: #DED887; border: none; width: 60px; padding-top: 5px; padding-bottom: 5px;" type="submit" name="update_user" class="update-btn">Update</button>
                         </form>
                     </td>
                 </tr>
@@ -332,8 +349,7 @@ if ($result !== null) {
 </div> -->
 
 <!-- <p><a href="logout.php">Logout</a></p> -->
-<p><a href="CreateUser.php">CreateUser</a></p>
-<p><a href="adminMessages.php">Get Messages</a></p>
+
 
 </body>
 </html>

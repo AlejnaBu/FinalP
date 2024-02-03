@@ -49,25 +49,39 @@ body{
  box-sizing: border-box;
 }
 
-header{
-            display: flex;
-            justify-content: space-between;
-            width: 100%; 
-           z-index: 1000; /* Bon qe pjesa e header me nejt ntop*/
-            
-        }
-        header li{
-          padding: 15px;
-          margin-left: 15px;
-          list-style-type: none;
+   header {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         z-index: 1000;
+         background-color: transparent; 
+     }
 
-       }
-        header ul  {
+      header .headeri {
+         padding: 10px; 
+     }
+
+     header ul {
         display: flex;
         justify-content: flex-end;
-        font-size: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size:20px;
+        margin-top: 10px;
+     }
 
-      }
+    header li {
+        margin: 0 15px;
+    }
+
+    header a {
+       text-decoration: none;
+       color: black;
+    }
  
  .container{
      width: 100%;
