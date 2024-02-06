@@ -11,20 +11,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $email = $_POST["email"];
 
-    // Hash the password
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+   
 
     // Use prepared statement to prevent SQL injection
     $sql = "INSERT INTO users (username, password, email) VALUES (:username, :password, :email)";
     $stmt = $data->prepare($sql);
     $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $hashedPassword);
+    $stmt->bindParam(':password', $password);
     $stmt->bindParam(':email', $email);
 
     if ($stmt->execute()) {
         $cookie_name = "registration_success";
-        $cookie_value = "true";
-        setcookie($cookie_name, $cookie_value, time() + 3600, "/"); // Expires in 1 hour
 
         echo '<script>alert("User registration successful");</script>';
     } else {
@@ -195,6 +192,7 @@ input{
         function validateForm() {
             var username = document.getElementsByName("username")[0].value;
             var password = document.getElementsByName("password")[0].value;
+            var email = document.getElementsByName("email")[0].value;
 
             if (username.length > 15) {
                 alert("Username must be 15 characters or less.");
@@ -206,7 +204,12 @@ input{
                 return false;
             }
 
-            // If validation passes, the form will be submitted
+            if (email.indexOf("@") === -1) {
+            alert("Please add @ to your email");
+            return false;
+        }
+
+           
             return true;
         }
     </script>

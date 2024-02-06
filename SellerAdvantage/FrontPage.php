@@ -1,4 +1,8 @@
+<?php
+  
+  session_start();
 
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -51,31 +55,6 @@
     }
 
     /* responsive header */
-
- 
-    @media only screen and (max-width: 320px) {
-    header {
-        position: static;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .headeri img {
-        height: 40px;
-        margin-bottom: 10px;
-    }
-
-    header ul {
-        margin-top: 10px;
-    }
-
-    header li {
-        margin: 5px 0;
-    }
-}
-
- 
-
 
      .image-container {
         position: relative;

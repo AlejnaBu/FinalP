@@ -34,8 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Username or password is incorrect";
         }
-    } else {
-        echo "Username or password is incorrect";
     }
 }
 

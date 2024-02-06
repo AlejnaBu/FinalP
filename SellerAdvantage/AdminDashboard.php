@@ -23,6 +23,20 @@ $userUpdate = new UserUpdate($data);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if (isset($_POST["create_staff"])) {
+        $name = $_POST["name"];
+        $experiences = $_POST["experiences"];
+
+        $sql = "INSERT INTO staff (name, experiences) VALUES (?, ?)";
+        $stmt = $data->prepare($sql);
+
+        if ($stmt->execute([$name, $experiences])) {
+            echo '<script>alert("Staff member added successfully");</script>';
+        } else {
+            echo "Error: " . $stmt->errorInfo()[2];
+        }
+    }
    
     if (isset($_POST["create_user"])) {
         $username = $_POST["new_username"];
@@ -51,35 +65,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        $userDeletion->deleteUser($_POST["delete_user_id"]);
      }
 
-    // Handle Update Form Submission
+// Handle Update Form Submission
 if (isset($_POST["update_user"])) {
     $user_id = $_POST["update_user_id"];
     $userDetails = $userUpdate->getUserDetails($user_id);
 
     if ($userDetails !== null) {
         ?>
-            <div class="update">
-        <h2>Update User</h2>
-        <form action="" method="post">
-            <input type="hidden" name="user_id" value="<?= $userDetails['id']; ?>">
-            
-            <label for="update_username">Username:</label>
-            <input type="text" id="update_username" name="update_username" placeholder="Username" value="<?= $userDetails['username']; ?>" required><br>
+        <div class="update">
+            <h2>Update User</h2>
+            <form action="" method="post">
+                <input type="hidden" name="user_id" value="<?= $userDetails['id']; ?>">
+                
+                <label for="update_username">Username:</label>
+                <input type="text" id="update_username" name="update_username" placeholder="Username" value="<?= $userDetails['username']; ?>" required><br>
 
-            <label for="update_password">New Password (leave blank to keep current):</label>
-            <input type="password" id="update_password" name="update_password" placeholder="New Password"><br>
+                <label for="update_password">New Password (leave blank to keep current):</label>
+                <input type="password" id="update_password" name="update_password" placeholder="New Password"><br>
 
-            <label for="update_email">Email:</label>
-            <input type="email" id="update_email" name="update_email" placeholder="Email" value="<?= $userDetails['email']; ?>" required><br>
+                <label for="update_email">Email:</label>
+                <input type="email" id="update_email" name="update_email" placeholder="Email" value="<?= $userDetails['email']; ?>" required><br>
 
-            <input type="submit" style="background-color: #FFD700; border: none; padding-top: 5px; padding-bottom: 5px;" name="confirm_update" value="Update User">
-        </form>
-    </div>
+                <!-- Add a hidden input for identifying the update action -->
+                <input type="hidden" name="update_action" value="confirm_update">
+
+                <input type="submit" style="background-color: #FFD700; border: none; padding-top: 5px; padding-bottom: 5px;" name="confirm_update" value="Update User">
+            </form>
+        </div>
 <?php
     } else {
         echo "Error fetching user details for update.";
     }
 }
+
+// Handle Confirm Update Form Submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_action"]) && $_POST["update_action"] == "confirm_update") {
+    $user_id = $_POST["user_id"];
+    $new_username = $_POST["update_username"];
+    $new_password = $_POST["update_password"];
+    $new_email = $_POST["update_email"];
+
+    // Call updateUser method from UserUpdate class
+    $userUpdate->updateUser($user_id, $new_username, $new_password, $new_email);
+}
+
 
     // Handle Confirm Update Form Submission
     // if (isset($_POST["confirm_update"])) {

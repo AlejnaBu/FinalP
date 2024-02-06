@@ -8,9 +8,9 @@ class MessageHandler {
     }
 
     public function saveMessage($username, $email, $messageContent) {
-        $sql = "INSERT INTO messages (username, email, message) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO messages (username, email, messages) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($sql);
-
+    
         if ($stmt->execute([$username, $email, $messageContent])) {
             return true;
         } else {

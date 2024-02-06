@@ -83,7 +83,7 @@ $messages = $messageHandler->getMessages();
             <td><?php echo $message['id']; ?></td>
             <td><?php echo $message['username']; ?></td>
             <td><?php echo $message['email']; ?></td>
-            <td><?php echo $message['message']; ?></td>
+            <td><?php echo $message['messages']; ?></td>
         </tr>
     <?php endforeach; ?>
 </table>
