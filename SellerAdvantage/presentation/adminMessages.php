@@ -1,14 +1,11 @@
 <?php
-
-include 'MessageHandler.php';
-include 'DbConnect.php';
+require_once '../business/MessageHandler.php';
+require_once '../dataa/DbConnect.php';
 
 $dbConnect = new DbConnect();
 $data = $dbConnect->getConnection();
 
-$messageHandler = new MessageHandler($data); 
-
-
+$messageHandler = new MessageHandler($data);
 $messages = $messageHandler->getMessages();
 ?>
 
@@ -30,10 +27,6 @@ $messages = $messageHandler->getMessages();
             height: 100vh;
         }
 
-       
-
-       
-
         h2 {
             color: #20B2AA;
             text-align: center;
@@ -43,7 +36,6 @@ $messages = $messageHandler->getMessages();
             width: 80%;
             margin-top: 20px;
             border-collapse: collapse;
-           
         }
 
         th, td {
@@ -59,34 +51,30 @@ $messages = $messageHandler->getMessages();
     </style>
 </head>
 <body>
-<div class="headeri">
-        <img src="FrontImg.html/Logo.png" height="90px" alt="logo" >
+    <div class="headeri">
+        <img src="../FrontImg.html/Logo.png" height="90px" alt="logo">
     </div>
     <ul>
         <li><a style="text-decoration: none; color: black;" href="adminDashboard.php">Dashboard</a></li>
         <li><a style="text-decoration: none; color: black;" href="LogIn.php">Log In</a></li>
         <li><a style="text-decoration: none; color: black;" href="LogOut.php">Log Out</a></li>
     </ul>
-</header>
 
-<!-- <h2>Admin Messages</h2> -->
-
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Message</th>
-    </tr>
-    <?php foreach ($messages as $message) : ?>
+    <table border="1">
         <tr>
-            <td><?php echo $message['id']; ?></td>
-            <td><?php echo $message['username']; ?></td>
-            <td><?php echo $message['email']; ?></td>
-            <td><?php echo $message['messages']; ?></td>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Message</th>
         </tr>
-    <?php endforeach; ?>
-</table>
-
+        <?php foreach ($messages as $message) : ?>
+            <tr>
+                <td><?php echo $message['id']; ?></td>
+                <td><?php echo $message['username']; ?></td>
+                <td><?php echo $message['email']; ?></td>
+                <td><?php echo $message['messages']; ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 </body>
 </html>
