@@ -1,27 +1,38 @@
 <?php
-session_start();
+require_once '../business/Auth.php'; // Përdorimi i klasës Auth
+require_once '../data/dbConnect.php';
+require_once '../business/MessageHandler.php';
 
-if (!isset($_SESSION['username'])) {
-    header("location: ../presentation/LogIn.php");
-    exit();
-}
 
-include '../data/dbConnect.php';
-include '../business/MessageHandler.php';
+use data\DbConnect; // Përdorimi i hapësirës së emrave për DbConnect
+use business\Auth;
+use business\MessageHandler;
 
+// Krijimi i lidhjes me bazën e të dhënave
 $dbConnect = new DbConnect();
 $data = $dbConnect->getConnection();
+
+// Krijimi i instancës Auth me lidhjen
+$auth = new Business\Auth($data);
+
+// Autentikimi i përdoruesit
+$auth->authenticateUser();
+
 $messageHandler = new MessageHandler($data);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $message = $_POST["message"];
+    $username = htmlspecialchars(trim($_POST["username"]));
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+    $message = htmlspecialchars(trim($_POST["message"]));
 
-    if ($messageHandler->saveMessage($username, $email, $message)) {
-        echo '<script>alert("Message sent successfully!");</script>';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo '<script>alert("Invalid email format.");</script>';
     } else {
-        echo '<script>alert("Failed to send message. Try again.");</script>';
+        if ($messageHandler->saveMessage($username, $email, $message)) {
+            echo '<script>alert("Message sent successfully!");</script>';
+        } else {
+            echo '<script>alert("Failed to send message. Try again.");</script>';
+        }
     }
 }
 ?>

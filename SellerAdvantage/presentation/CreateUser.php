@@ -1,46 +1,37 @@
 <?php 
-
-// Autoload classes for cleaner structure
-include_once __DIR__ . '/../data/dbConnect.php'; 
-include_once __DIR__ . '/../business/UserManager.php'; 
+require_once '../business/auth.php';
+require_once '../data/dbConnect.php';
+require_once '../business/UserManager.php';
 
 session_start();
 
-// Check for admin access
-if (!isset($_SESSION['username']) || $_SESSION['usertype'] !== 'admin') {
-    header("location: ../presentation/LogIn.php");
-    exit();
+$dbConnect = new DbConnect();
+$connection = $dbConnect->getConnection();
+
+$auth = new Business\Auth($connection);
+$auth->authenticateUser();
+
+$userManager = new UserManager($dbConnect);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create_user"])) {
+    $username = htmlspecialchars($_POST["new_username"]);
+    $password = password_hash($_POST["new_password"], PASSWORD_BCRYPT); // Encrypt password
+    $email = filter_var($_POST["new_email"], FILTER_SANITIZE_EMAIL);
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<p style='color:red;'>Invalid email format.</p>";
+        return;
+    }
+
+    $result = $userManager->createUser($username, $password, $email);
+
+    if ($result === true) {
+        echo '<script>alert("User registration successful");</script>';
+    } else {
+        echo "<p style='color:red;'>Error creating user: {$result}</p>";
+    }
 }
-
-class CreateUserPage
-{
-    private $userManager;
-
-    public function __construct(UserManager $userManager)
-    {
-        $this->userManager = $userManager;
-    }
-
-    public function handleUserCreation()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create_user"])) {
-            $username = htmlspecialchars($_POST["new_username"]);
-            $password = password_hash($_POST["new_password"], PASSWORD_BCRYPT); // Use hashed passwords
-            $email = filter_var($_POST["new_email"], FILTER_SANITIZE_EMAIL);
-
-            $result = $this->userManager->createUser($username, $password, $email);
-
-            if ($result === true) {
-                echo '<script>alert("User registration successful");</script>';
-            } else {
-                echo "<p style='color:red;'>Error creating user: {$result}</p>";
-            }
-        }
-    }
-
-    public function render()
-    {
-        ?>
+?>
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -155,5 +146,4 @@ $createUserPage = new CreateUserPage($userManager);
 
 $createUserPage->handleUserCreation();
 $createUserPage->render();
-
 ?>

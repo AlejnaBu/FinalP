@@ -1,19 +1,37 @@
 <?php
-session_start();
+namespace Business;
 
-function authenticateUser() {
-    if (!isset($_SESSION['user_id'])) {
-        header("location: LogIn.php");
-        exit();
+use PDO;
+
+class Auth {
+    private $db;
+
+    public function __construct(PDO $db) {
+        $this->db = $db;
     }
 
-    // Check user type for authorization (optional)
-    if ($_SESSION['usertype'] == "admin" && basename($_SERVER['PHP_SELF']) != "AdminDashboard.php") {
-        header("location: AdminDashboard.php");
-        exit();
+    public function authenticate($username, $password, $connection) {
+        $sql = "SELECT * FROM users WHERE username = ?";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([$username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
+    public function authenticateUser() {
+        session_start();
+        if (!isset($_SESSION['username'])) {
+            header("Location: LogIn.php");
+            exit();
+        }
     }
 }
 
-// Call this function at the beginning of pages where authentication is required
-authenticateUser();
+
+
 ?>

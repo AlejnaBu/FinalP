@@ -2,12 +2,15 @@
 
 session_start();
 
-if (!isset($_SESSION['username']) || $_SESSION['usertype'] !== 'admin') {
-    header("location: ../presentation/LogIn.php");
-    exit();
-}
+// Përshijmë klasën Auth për autentikim
+require_once '../business/auth.php';
+use Business\Auth;
 
-// Përfshijmë klasat nga shtresa e të dhënave dhe biznesit
+// Krijojmë instancën e klasës Auth dhe kontrollojmë autentikimin
+$auth = new Auth();
+$auth->authenticateUser();
+
+// Përshijmë klasat nga shtresa e të dhënave dhe biznesit
 require_once '../data/DbConnect.php';
 require_once '../business/UserDeletion.php';
 require_once '../business/UserUpdate.php';

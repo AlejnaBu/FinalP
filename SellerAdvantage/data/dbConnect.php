@@ -1,24 +1,30 @@
 <?php
-class DbConnect {
-    private $conn;
 
-    public function __construct() {
-        $this->conn = null;
-        $this->host = 'localhost';
-        $this->dbname = 'databaza'; // Update to your database name
-        $this->username = 'root';
-        $this->password = '';
+namespace Data;
+
+use PDO;
+use PDOException;
+
+class DbConnect
+{
+    private $host = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $dbName = "databaza";
+    private $connection;
+
+    public function __construct()
+    {
+        try {
+            $this->connection = new PDO("mysql:host={$this->host};dbname={$this->dbName}", $this->username, $this->password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Database connection failed: " . $e->getMessage());
+        }
     }
 
-    public function getConnection() {
-        try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        } catch (PDOException $pdoe) {
-            die("Cannot connect to the database: " . $pdoe->getMessage());
-        }
-        return $this->conn;
+    public function getConnection()
+    {
+        return $this->connection;
     }
 }
-?>

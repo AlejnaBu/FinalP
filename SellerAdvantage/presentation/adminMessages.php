@@ -1,6 +1,11 @@
 <?php
 require_once '../business/MessageHandler.php';
+require_once '../business/Auth.php'; // Përfshirja e klasës Auth
 require_once '../dataa/DbConnect.php';
+
+// Krijimi i instancës së klasës Auth dhe thirrja e metodës për autentikim
+$auth = new Business\Auth();
+$auth->authenticateUser();
 
 $dbConnect = new DbConnect();
 $data = $dbConnect->getConnection();
@@ -47,6 +52,29 @@ $messages = $messageHandler->getMessages();
         th {
             background-color: #DEB887;
             color: white;
+        }
+
+        .headeri img {
+            display: block;
+            margin: 20px auto;
+        }
+
+        ul {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
         }
     </style>
 </head>

@@ -1,24 +1,30 @@
 <?php
-// /presentation/SignUp.php
-
-require_once '../business/UserManager.php';
 require_once '../data/DbConnect.php';
-
-use Business\UserManager;
-use Data\DbConnect;
+require_once '../business/UserManager.php';
 
 $dbConnect = new DbConnect();
 $userManager = new UserManager($dbConnect);
 
+$errorMessage = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-        $email = $_POST["email"];
-        $userManager->createUser($username, $password, $email);
+        $username = htmlspecialchars(trim($_POST["username"]));
+        $password = htmlspecialchars(trim($_POST["password"]));
+        $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception("Invalid email format.");
+        }
+        if (strlen($password) < 6) {
+            throw new Exception("Password must be at least 6 characters.");
+        }
+
+        $userManager->createUser($username, password_hash($password, PASSWORD_BCRYPT), $email);
+
         echo '<script>alert("User created successfully.");</script>';
     } catch (Exception $e) {
-        echo '<script>alert("Error: ' . $e->getMessage() . '");</script>';
+        $errorMessage = $e->getMessage();
     }
 }
 ?>
@@ -29,13 +35,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <style>
-        /* Add your CSS styling here */
-    </style>
+    <link rel="stylesheet" href="../styles/signup.css">
 </head>
 <body>
     <div class="container">
-        <form action="#" method="POST">
+        <h2>Sign Up</h2>
+        <?php if ($errorMessage): ?>
+            <p style="color: red;"><?php echo $errorMessage; ?></p>
+        <?php endif; ?>
+        <form action="" method="POST">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
 
