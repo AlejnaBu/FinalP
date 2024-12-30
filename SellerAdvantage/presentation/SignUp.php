@@ -2,6 +2,10 @@
 require_once '../data/DbConnect.php';
 require_once '../business/UserManager.php';
 
+use Data\DbConnect;
+use Business\UserManager;
+
+// Krijimi i lidhjes me bazën e të dhënave
 $dbConnect = new DbConnect();
 $userManager = new UserManager($dbConnect);
 
@@ -13,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = htmlspecialchars(trim($_POST["password"]));
         $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
 
+        // Validimi i të dhënave
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception("Invalid email format.");
         }
@@ -20,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             throw new Exception("Password must be at least 6 characters.");
         }
 
+        // Krijimi i përdoruesit të ri
         $userManager->createUser($username, password_hash($password, PASSWORD_BCRYPT), $email);
 
         echo '<script>alert("User created successfully.");</script>';
@@ -30,31 +36,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="../styles/signup.css">
+
+    <link rel="stylesheet" href="../styles/signup.css"> <!-- Path corrected for CSS -->
 </head>
-<body>
-    <div class="container">
-        <h2>Sign Up</h2>
-        <?php if ($errorMessage): ?>
+<html lang="en">
+<header>
+    <div class="headeri">
+        <img src="../FrontImg.html/Logo.png" alt="Logo">
+    </div>
+    <ul>
+        <li><a href="FrontPage.php">Home</a></li>
+        <li><a href="AboutUs.php">About Us</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href="LogIn.php">Log In</a></li>
+        <li><a href="LogOut.php">Log Out</a></li>
+    </ul>
+</header>
+
+<div class="container">
+    <div class="container-2">
+        <h1>Sign Up</h1>
+        <?php if (isset($errorMessage)): ?>
             <p style="color: red;"><?php echo $errorMessage; ?></p>
         <?php endif; ?>
         <form action="" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
-
-            <input type="submit" value="Sign Up">
+            <div class="input-group">
+                <input type="text" class="input-field" placeholder="Username" name="username" required>
+                <input type="password" class="input-field" placeholder="Password" name="password" required>
+                <input type="email" class="input-field" placeholder="Email" name="email" required>
+                <p>Already have an account? <a href="LogIn.php">Log In</a></p>
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </div>
         </form>
     </div>
+</div>
 </body>
 </html>

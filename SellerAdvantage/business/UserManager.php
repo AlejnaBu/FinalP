@@ -1,4 +1,8 @@
 <?php
+namespace Business;
+
+use Data\DbConnect;
+
 class UserManager {
     private $db;
 
@@ -14,7 +18,7 @@ class UserManager {
             die("SQL query failed: " . $this->db->errorInfo()[2]);
         }
 
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        return $result->fetchAll(\PDO::FETCH_ASSOC); // Sigurohuni që \PDO të përdoret nëse hapësira e emrave ndryshon
     }
 
     public function createUser($username, $password, $email) {
@@ -50,19 +54,15 @@ class UserManager {
         }
     }
 
-    // Add more methods as needed for your specific requirements
-
-    // For example:
     public function getUserDetails($userId) {
         $sql = "SELECT * FROM users WHERE id = ?";
         $stmt = $this->db->prepare($sql);
 
         if ($stmt->execute([$userId])) {
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch(\PDO::FETCH_ASSOC); // Përdorimi i hapësirës globale për PDO
         } else {
             return "Error fetching user details: " . $stmt->errorInfo()[2];
         }
     }
 }
 ?>
-       

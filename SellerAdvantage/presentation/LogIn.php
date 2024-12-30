@@ -2,8 +2,8 @@
 require_once '../data/dbConnect.php';
 require_once '../business/auth.php';
 
-use Business\Auth;
-use Data\DbConnect;
+use business\Auth;
+use data\DbConnect;
 
 // Establish a database connection
 $dbConnect = new DbConnect();
