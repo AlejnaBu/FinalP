@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Krijimi i përdoruesit të ri
-        $userManager->createUser($username, password_hash($password, PASSWORD_BCRYPT), $email);
+        $userManager->createUser($username, $password, $email);
 
         echo '<script>alert("User created successfully.");</script>';
     } catch (Exception $e) {

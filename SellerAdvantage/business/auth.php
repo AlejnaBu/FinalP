@@ -16,7 +16,8 @@ class Auth {
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['password'])) {
+        // Krahasimi me plaintext password
+        if ($user && $password === $user['password']) {
             return $user;
         } else {
             return false;
@@ -31,7 +32,4 @@ class Auth {
         }
     }
 }
-
-
-
 ?>

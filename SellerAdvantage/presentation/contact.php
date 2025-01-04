@@ -1,23 +1,23 @@
 <?php
-require_once '../business/Auth.php'; // Përdorimi i klasës Auth
 require_once '../data/dbConnect.php';
+require_once '../business/Auth.php';
 require_once '../business/MessageHandler.php';
 
-
-use data\DbConnect; // Përdorimi i hapësirës së emrave për DbConnect
-use business\Auth;
-use business\MessageHandler;
+use Data\DbConnect;
+use Business\Auth;
+use Business\MessageHandler;
 
 // Krijimi i lidhjes me bazën e të dhënave
 $dbConnect = new DbConnect();
 $data = $dbConnect->getConnection();
 
 // Krijimi i instancës Auth me lidhjen
-$auth = new Business\Auth($data);
+$auth = new Auth($data);
 
 // Autentikimi i përdoruesit
 $auth->authenticateUser();
 
+// Krijimi i instancës së MessageHandler
 $messageHandler = new MessageHandler($data);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -36,10 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -115,7 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
 </head>
-
 <body>
 <header>
     <ul>
@@ -143,5 +140,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </div>
 </body>
-
 </html>

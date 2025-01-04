@@ -1,201 +1,109 @@
 <?php
-require_once '../data/dbConnect.php';
-require_once '../business/auth.php';
+session_start();
 
-use business\Auth;
-use data\DbConnect;
+$host = "localhost";
+$username = "root";
+$password = "";
+$db = "databaza";
 
-// Establish a database connection
-$dbConnect = new DbConnect();
-$connection = $dbConnect->getConnection();
+try {
+    $data = new PDO("mysql:host=$host;dbname=$db", $username, $password);
+    $data->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
 
-// Instantiate the Auth class with the database connection
-$auth = new Auth($connection);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST["username"]);
+    $password = trim($_POST["password"]);
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = htmlspecialchars($_POST["username"]);
-    $password = htmlspecialchars($_POST["password"]);
+    if (!empty($username) && !empty($password)) {
+        $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+        $stmt = $data->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
 
-    // Authenticate user
-    $user = $auth->authenticate($username, $password, $connection);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
-        // Set session variables on successful login
-        session_start();
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['usertype'] = $user['usertype'];
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['login_time'] = time();
+        if ($row) {
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['usertype'] = $row['usertype'];
+            $_SESSION['login_time'] = time();
 
-        // Redirect based on user type
-        if ($user['usertype'] === "admin") {
-            header("Location: AdminDashboard.php");
+            if ($_SESSION['usertype'] == "user") {
+                header("location: FrontPage.php");
+                exit();
+            } elseif ($_SESSION['usertype'] == "admin") {
+                header("location: AdminDashboard.php");
+                exit();
+            }
         } else {
-            header("Location: FrontPage.php");
+            echo '<script>alert("Invalid username or password!");</script>';
         }
+    } else {
+        echo '<script>alert("Please fill in all fields!");</script>';
+    }
+}
+
+// Check for session expiration
+if (isset($_SESSION['username']) && isset($_SESSION['login_time'])) {
+    $expiration_time = $_SESSION['login_time'] + (1 * 60 * 60) + (30 * 60); // 1 hour and 30 minutes
+
+    if (time() > $expiration_time) {
+        session_unset();
+        session_destroy();
+        header("location: LogIn.php");
         exit();
     } else {
-        $error = "Invalid username or password.";
+        $_SESSION['login_time'] = time();
     }
+}
+
+// Redirect if already logged in
+if (isset($_SESSION['username'])) {
+    header("location: FrontPage.php");
+    exit();
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Log In to your account">
-    <meta name="author" content="Your Company Name">
-    <title>Log In | Furniture Shop</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: url("../FrontImg.html/bg.webp");
-            background-size: cover;
-            background-position: center;
-            color: #333;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        header .headeri img {
-            height: 70px;
-        }
-
-        header ul {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-            margin: 0;
-            padding: 0;
-        }
-
-        header li {
-            display: inline;
-        }
-
-        header a {
-            text-decoration: none;
-            color: black;
-            font-size: 16px;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 20px;
-        }
-
-        .container-2 {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .input-field {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 100%;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #007BFF;
-        }
-
-        .input-group p {
-            text-align: center;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .input-group p a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        .input-group p a:hover {
-            text-decoration: underline;
-        }
-
-        .submit-btn {
-            background-color: #28a745;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #218838;
-        }
-    </style>
+    <title>Log In</title>
+    <link rel="stylesheet" href="../styles/login.css">
+   
 </head>
-<body>
-<header>
-    <div class="headeri">
-        <img src="../FrontImg.html/Logo.png" alt="Logo">
-    </div>
-    <ul>
-        <li><a href="FrontPage.php">Home</a></li>
-        <li><a href="AboutUs.php">About Us</a></li>
-        <li><a href="contact.php">Contact</a></li>
-        <li><a href="LogIn.php">Log In</a></li>
-        <li><a href="LogOut.php">Log Out</a></li>
-    </ul>
-</header>
 
-<div class="container">
-    <div class="container-2">
-        <h1>Log In</h1>
-        <?php if (isset($error)): ?>
-            <p style="color: red;"><?php echo $error; ?></p>
-        <?php endif; ?>
-        <form action="" method="POST">
-            <div class="input-group">
-                <input type="text" class="input-field" placeholder="Username" name="username" required>
-                <input type="password" class="input-field" placeholder="Password" name="password" required>
-                <p>Don't have an account? <a href="SignUp.php">Sign Up</a></p>
-                <button type="submit" class="submit-btn">Log In</button>
-            </div>
-        </form>
+<body>
+    <header>
+        <div class="headeri">
+            <img src="FrontImg.html/Logo.png" height="50" alt="logo">
+        </div>
+        <ul>
+            <li><a href="FrontPage.php">Home</a></li>
+            <li><a href="AboutUs.php">About Us</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="SignUp.php">Sign Up</a></li>
+        </ul>
+    </header>
+
+    <div class="container">
+        <div class="container-2">
+            <h1>Log In</h1>
+            <form action="" method="POST">
+                <div class="input-group">
+                    <input class="input-field" type="text" name="username" placeholder="Username" required>
+                    <input class="input-field" type="password" name="password" placeholder="Password" required>
+                    <input class="submit-btn" type="submit" value="Log In">
+                </div>
+            </form>
+            <p>Don't have an account? <a href="SignUp.php">Sign Up</a></p>
+        </div>
     </div>
-</div>
 </body>
+
 </html>
