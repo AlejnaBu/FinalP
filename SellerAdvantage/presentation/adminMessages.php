@@ -1,16 +1,20 @@
 <?php
+require_once '../data/DbConnect.php';
+require_once '../data/MessageRepository.php';
 require_once '../business/MessageHandler.php';
-require_once '../business/Auth.php'; // Përfshirja e klasës Auth
-require_once '../dataa/DbConnect.php';
 
-// Krijimi i instancës së klasës Auth dhe thirrja e metodës për autentikim
-$auth = new Business\Auth();
-$auth->authenticateUser();
+use Data\DbConnect;
+use Data\MessageRepository;
+use Business\MessageHandler;
 
+// Krijo lidhjen me bazën e të dhënave dhe instancat e nevojshme
 $dbConnect = new DbConnect();
-$data = $dbConnect->getConnection();
+$connection = $dbConnect->getConnection();
 
-$messageHandler = new MessageHandler($data);
+$messageRepository = new MessageRepository($connection);
+$messageHandler = new MessageHandler($messageRepository);
+
+// Merr të gjithë mesazhet
 $messages = $messageHandler->getMessages();
 ?>
 

@@ -1,33 +1,43 @@
 <?php
-namespace Business;
+require_once '../data/DbConnect.php';
+require_once '../data/MessageRepository.php';
+require_once '../business/MessageHandler.php';
 
-use Data\UserRepository;
+use Data\DbConnect;
+use Data\MessageRepository;
+use Business\MessageHandler;
 
-class UserManager {
-    private $userRepository;
+// Krijimi i lidhjes me bazën e të dhënave dhe instancave të nevojshme
+$dbConnect = new DbConnect();
+$connection = $dbConnect->getConnection();
 
-    public function __construct(UserRepository $userRepository) {
-        $this->userRepository = $userRepository;
-    }
+$messageRepository = new MessageRepository($connection);
+$messageHandler = new MessageHandler($messageRepository);
 
-    public function createUser($username, $password, $email) {
-        return $this->userRepository->insertUser($username, $password, $email);
-    }
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Sanitizimi i të dhënave të formularit
+    $username = htmlspecialchars(trim($_POST["username"]));
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+    $messageContent = htmlspecialchars(trim($_POST["message"]));
 
-    public function getAllUsers() {
-        return $this->userRepository->fetchAllUsers();
-    }
+    // Validimi bazik
+    if (empty($username) || empty($email) || empty($messageContent)) {
+        echo '<script>alert("All fields are required.");</script>';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo '<script>alert("Invalid email format.");</script>';
+    } else {
+        // Ruajtja e mesazhit
+        $result = $messageHandler->saveMessage($username, $email, $messageContent);
 
-    public function deleteUser($userId) {
-        return $this->userRepository->removeUser($userId);
-    }
-
-    public function updateUser($userId, $newUsername, $newPassword, $newEmail) {
-        return $this->userRepository->updateUser($userId, $newUsername, $newPassword, $newEmail);
-    }
-
-    public function getUserDetails($userId) {
-        return $this->userRepository->getUserById($userId);
+        if ($result) {
+            echo '<script>alert("Message saved successfully.");</script>';
+        } else {
+            echo '<script>alert("Failed to save the message. Please try again.");</script>';
+        }
     }
 }
+
+// Riekzekutimi në faqen `Contact.php`
+header("Location: Contact.php");
+exit();
 ?>

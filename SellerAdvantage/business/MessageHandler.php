@@ -1,35 +1,21 @@
 <?php
 namespace Business;
 
-use PDO;
+use Data\MessageRepository;
 
 class MessageHandler {
-    private $db;
+    private $messageRepository;
 
-    public function __construct(PDO $db) {
-        $this->db = $db;
+    public function __construct(MessageRepository $messageRepository) {
+        $this->messageRepository = $messageRepository;
     }
 
     public function saveMessage($username, $email, $messageContent) {
-        try {
-            $sql = "INSERT INTO messages (username, email, messages) VALUES (?, ?, ?)";
-            $stmt = $this->db->prepare($sql);
-            return $stmt->execute([$username, $email, $messageContent]);
-        } catch (\Exception $e) {
-            // Log the error or handle it appropriately
-            return false;
-        }
+        // Logjika e validimit mund të vendoset këtu nëse është e nevojshme
+        return $this->messageRepository->saveMessage($username, $email, $messageContent);
     }
 
     public function getMessages() {
-        try {
-            $sql = "SELECT * FROM messages";
-            $stmt = $this->db->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (\Exception $e) {
-            // Log the error or handle it appropriately
-            return [];
-        }
+        return $this->messageRepository->getMessages();
     }
 }
-?>
