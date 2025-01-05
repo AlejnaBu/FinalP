@@ -1,36 +1,32 @@
 <?php
+namespace Business;
 
-class UserUpdate
-{
-    private $data;
+use Data\UserRepository;
 
-    public function __construct(PDO $data)
-    {
-        $this->data = $data;
+class UserManager {
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository) {
+        $this->userRepository = $userRepository;
     }
 
-    public function getUserDetails($userId)
-    {
-        $sql = "SELECT * FROM users WHERE id = ?";
-        $stmt = $this->data->prepare($sql);
-
-        if ($stmt->execute([$userId])) {
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } else {
-            echo "Error fetching user details for update: " . $stmt->errorInfo()[2];
-            return null;
-        }
+    public function createUser($username, $password, $email) {
+        return $this->userRepository->insertUser($username, $password, $email);
     }
 
-    public function updateUser($userId, $newUsername, $newPassword, $newEmail)
-    {
-        $sql = "UPDATE users SET username = ?, password = ?, email = ? WHERE id = ?";
-        $stmt = $this->data->prepare($sql);
+    public function getAllUsers() {
+        return $this->userRepository->fetchAllUsers();
+    }
 
-        if ($stmt->execute([$newUsername, $newPassword, $newEmail, $userId])) {
-            echo '<script>alert("User updated successfully");</script>';
-        } else {
-            echo "Error updating user: " . $stmt->errorInfo()[2];
-        }
+    public function deleteUser($userId) {
+        return $this->userRepository->removeUser($userId);
+    }
+
+    public function updateUser($userId, $newUsername, $newPassword, $newEmail) {
+        return $this->userRepository->updateUser($userId, $newUsername, $newPassword, $newEmail);
+    }
+
+    public function getUserDetails($userId) {
+        return $this->userRepository->getUserById($userId);
     }
 }

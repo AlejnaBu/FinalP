@@ -1,27 +1,24 @@
 <?php
 namespace Business;
 
-use PDO;
+use Data\UserRepository;
 
 class Auth {
-    private $db;
+    private $userRepository;
 
-    public function __construct(PDO $db) {
-        $this->db = $db;
+    public function __construct(UserRepository $userRepository) {
+        $this->userRepository = $userRepository;
     }
 
-    public function authenticate($username, $password, $connection) {
-        $sql = "SELECT * FROM users WHERE username = ?";
-        $stmt = $connection->prepare($sql);
-        $stmt->execute([$username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    public function authenticate($username, $password) {
+        $user = $this->userRepository->getUserByUsername($username);
 
-        // Krahasimi me plaintext password
+        // Kontrollo nëse përdoruesi ekziston dhe nëse fjalëkalimi përputhet
         if ($user && $password === $user['password']) {
-            return $user;
-        } else {
-            return false;
+            return $user; // Kthe të dhënat e përdoruesit nëse autentikimi ka sukses
         }
+
+        return false; // Kthe false nëse autentikimi dështoi
     }
 
     public function authenticateUser() {
@@ -32,4 +29,4 @@ class Auth {
         }
     }
 }
-?>
+

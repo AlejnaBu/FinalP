@@ -1,69 +1,65 @@
 <?php
 session_start();
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$db = "databaza";
+require_once '../data/DbConnect.php';
+require_once '../data/UserRepository.php';
+require_once '../business/Auth.php';
 
-try {
-    $data = new PDO("mysql:host=$host;dbname=$db", $username, $password);
-    $data->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+use Data\DbConnect;
+use Data\UserRepository;
+use Business\Auth;
+
+// Krijo lidhjen me bazën e të dhënave
+$dbConnect = new DbConnect();
+$connection = $dbConnect->getConnection();
+
+// Inicializo UserRepository dhe Auth
+$userRepository = new UserRepository($connection);
+$auth = new Auth($userRepository);
+
+// Verifiko nëse përdoruesi është tashmë i kyçur
+if (isset($_SESSION['username'])) {
+    header("location: FrontPage.php");
+    exit();
 }
 
+// Kontrollo kërkesën POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
 
     if (!empty($username) && !empty($password)) {
-        $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
-        $stmt = $data->prepare($sql);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', $password);
-        $stmt->execute();
+        $user = $auth->authenticate($username, $password);
 
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['usertype'] = $row['usertype'];
+        if ($user) {
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['usertype'] = $user['usertype'];
             $_SESSION['login_time'] = time();
 
-            if ($_SESSION['usertype'] == "user") {
-                header("location: FrontPage.php");
-                exit();
-            } elseif ($_SESSION['usertype'] == "admin") {
+            // Ridrejto bazuar në rolin e përdoruesit
+            if ($_SESSION['usertype'] === "admin") {
                 header("location: AdminDashboard.php");
-                exit();
+            } else {
+                header("location: FrontPage.php");
             }
+            exit();
         } else {
-            echo '<script>alert("Invalid username or password!");</script>';
+            $error = "Invalid username or password!";
         }
     } else {
-        echo '<script>alert("Please fill in all fields!");</script>';
+        $error = "Please fill in all fields!";
     }
 }
 
-// Check for session expiration
-if (isset($_SESSION['username']) && isset($_SESSION['login_time'])) {
-    $expiration_time = $_SESSION['login_time'] + (1 * 60 * 60) + (30 * 60); // 1 hour and 30 minutes
-
+// Kontrollo skadimin e sesionit
+if (isset($_SESSION['login_time'])) {
+    $expiration_time = $_SESSION['login_time'] + (1 * 60 * 60) + (30 * 60); // 1 orë e 30 minuta
     if (time() > $expiration_time) {
         session_unset();
         session_destroy();
         header("location: LogIn.php");
         exit();
-    } else {
-        $_SESSION['login_time'] = time();
     }
-}
-
-// Redirect if already logged in
-if (isset($_SESSION['username'])) {
-    header("location: FrontPage.php");
-    exit();
 }
 ?>
 

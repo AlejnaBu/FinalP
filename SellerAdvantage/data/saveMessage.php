@@ -1,26 +1,33 @@
 <?php
-session_start();
+namespace Business;
 
-include 'DbConnect.php';
-include 'MessageHandler.php'; // Include the MessageHandler class
+use Data\UserRepository;
 
-$dbConnect = new DbConnect();
-$data = $dbConnect->getConnection();
+class UserManager {
+    private $userRepository;
 
-$messageHandler = new MessageHandler($data); // Pass $data (database connection) to MessageHandler
+    public function __construct(UserRepository $userRepository) {
+        $this->userRepository = $userRepository;
+    }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $messageContent = $_POST["message"];
+    public function createUser($username, $password, $email) {
+        return $this->userRepository->insertUser($username, $password, $email);
+    }
 
-    if ($messageHandler->saveMessage($username, $email, $messageContent)) {
-        echo '<script>alert("Message sent successfully");</script>';
-    } else {
-        echo "Error saving the message.";
+    public function getAllUsers() {
+        return $this->userRepository->fetchAllUsers();
+    }
+
+    public function deleteUser($userId) {
+        return $this->userRepository->removeUser($userId);
+    }
+
+    public function updateUser($userId, $newUsername, $newPassword, $newEmail) {
+        return $this->userRepository->updateUser($userId, $newUsername, $newPassword, $newEmail);
+    }
+
+    public function getUserDetails($userId) {
+        return $this->userRepository->getUserById($userId);
     }
 }
-
-header("Location: Contact.php"); // Redirect back to the contact page
-exit();
 ?>

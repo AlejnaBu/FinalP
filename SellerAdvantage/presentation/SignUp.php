@@ -1,13 +1,19 @@
 <?php
 require_once '../data/DbConnect.php';
+require_once '../data/UserRepository.php';
 require_once '../business/UserManager.php';
+require_once '../business/Validator.php';
 
 use Data\DbConnect;
+use Data\UserRepository;
 use Business\UserManager;
+use Business\Validator;
 
-// Krijimi i lidhjes me bazën e të dhënave
+// Inicializo UserRepository dhe UserManager
 $dbConnect = new DbConnect();
-$userManager = new UserManager($dbConnect);
+$connection = $dbConnect->getConnection();
+$userRepository = new UserRepository($connection);
+$userManager = new UserManager($userRepository);
 
 $errorMessage = "";
 
@@ -18,17 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
 
         // Validimi i të dhënave
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception("Invalid email format.");
-        }
-        if (strlen($password) < 6) {
-            throw new Exception("Password must be at least 6 characters.");
-        }
+        Validator::validateEmail($email);
+        Validator::validatePassword($password);
 
         // Krijimi i përdoruesit të ri
         $userManager->createUser($username, $password, $email);
 
-        echo '<script>alert("User created successfully.");</script>';
+        $successMessage = "User created successfully.";
     } catch (Exception $e) {
         $errorMessage = $e->getMessage();
     }
