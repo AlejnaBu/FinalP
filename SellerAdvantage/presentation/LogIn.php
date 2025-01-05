@@ -4,62 +4,36 @@ session_start();
 require_once '../data/DbConnect.php';
 require_once '../data/UserRepository.php';
 require_once '../business/Auth.php';
+require_once '../business/SessionService.php';
+require_once '../controllers/LoginController.php';
 
 use Data\DbConnect;
 use Data\UserRepository;
 use Business\Auth;
+use Business\SessionService;
+use Controllers\LoginController;
 
-// Krijo lidhjen me bazën e të dhënave
+// Inicializo lidhjet dhe instancat
 $dbConnect = new DbConnect();
 $connection = $dbConnect->getConnection();
 
-// Inicializo UserRepository dhe Auth
 $userRepository = new UserRepository($connection);
 $auth = new Auth($userRepository);
+$sessionService = new SessionService();
 
-// Verifiko nëse përdoruesi është tashmë i kyçur
-if (isset($_SESSION['username'])) {
-    header("location: FrontPage.php");
+// Inicializo Controller-in
+$loginController = new LoginController($auth, $sessionService);
+
+// Nëse përdoruesi është tashmë i kyçur, ridrejtoje
+if ($sessionService->isUserLoggedIn()) {
+    $sessionService->redirectBasedOnRole();
     exit();
 }
 
-// Kontrollo kërkesën POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["username"]);
-    $password = trim($_POST["password"]);
-
-    if (!empty($username) && !empty($password)) {
-        $user = $auth->authenticate($username, $password);
-
-        if ($user) {
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['usertype'] = $user['usertype'];
-            $_SESSION['login_time'] = time();
-
-            // Ridrejto bazuar në rolin e përdoruesit
-            if ($_SESSION['usertype'] === "admin") {
-                header("location: AdminDashboard.php");
-            } else {
-                header("location: FrontPage.php");
-            }
-            exit();
-        } else {
-            $error = "Invalid username or password!";
-        }
-    } else {
-        $error = "Please fill in all fields!";
-    }
-}
-
-// Kontrollo skadimin e sesionit
-if (isset($_SESSION['login_time'])) {
-    $expiration_time = $_SESSION['login_time'] + (1 * 60 * 60) + (30 * 60); // 1 orë e 30 minuta
-    if (time() > $expiration_time) {
-        session_unset();
-        session_destroy();
-        header("location: LogIn.php");
-        exit();
-    }
+// Menaxho kërkesën POST për hyrje
+$error = null;
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $error = $loginController->handleLogin($_POST);
 }
 ?>
 

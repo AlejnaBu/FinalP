@@ -7,15 +7,17 @@ use Data\DbConnect;
 use Data\MessageRepository;
 use Business\MessageHandler;
 
-// Krijo lidhjen me bazën e të dhënave dhe instancat e nevojshme
+
 $dbConnect = new DbConnect();
 $connection = $dbConnect->getConnection();
-
 $messageRepository = new MessageRepository($connection);
 $messageHandler = new MessageHandler($messageRepository);
 
-// Merr të gjithë mesazhet
+
 $messages = $messageHandler->getMessages();
+
+
+
 ?>
 
 <!DOCTYPE html>

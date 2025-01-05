@@ -1,40 +1,18 @@
 <?php
-require_once '../data/dbConnect.php';
-require_once '../business/Auth.php';
+require_once '../data/DbConnect.php';
+require_once '../data/MessageRepository.php';
 require_once '../business/MessageHandler.php';
 
 use Data\DbConnect;
-use Business\Auth;
+use Data\MessageRepository;
 use Business\MessageHandler;
 
-// Krijimi i lidhjes me bazën e të dhënave
+
 $dbConnect = new DbConnect();
-$data = $dbConnect->getConnection();
+$connection = $dbConnect->getConnection();
+$messageRepository = new MessageRepository($connection);
+$messageHandler = new MessageHandler($messageRepository);
 
-// Krijimi i instancës Auth me lidhjen
-$auth = new Auth($data);
-
-// Autentikimi i përdoruesit
-$auth->authenticateUser();
-
-// Krijimi i instancës së MessageHandler
-$messageHandler = new MessageHandler($data);
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = htmlspecialchars(trim($_POST["username"]));
-    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    $message = htmlspecialchars(trim($_POST["message"]));
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo '<script>alert("Invalid email format.");</script>';
-    } else {
-        if ($messageHandler->saveMessage($username, $email, $message)) {
-            echo '<script>alert("Message sent successfully!");</script>';
-        } else {
-            echo '<script>alert("Failed to send message. Try again.");</script>';
-        }
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

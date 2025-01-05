@@ -15,29 +15,29 @@ $messageRepository = new MessageRepository($connection);
 $messageHandler = new MessageHandler($messageRepository);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Sanitizimi i të dhënave të formularit
+ 
     $username = htmlspecialchars(trim($_POST["username"]));
     $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
     $messageContent = htmlspecialchars(trim($_POST["message"]));
 
-    // Validimi bazik
-    if (empty($username) || empty($email) || empty($messageContent)) {
-        echo '<script>alert("All fields are required.");</script>';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo '<script>alert("Invalid email format.");</script>';
-    } else {
-        // Ruajtja e mesazhit
-        $result = $messageHandler->saveMessage($username, $email, $messageContent);
-
-        if ($result) {
-            echo '<script>alert("Message saved successfully.");</script>';
-        } else {
-            echo '<script>alert("Failed to save the message. Please try again.");</script>';
+    try {
+       
+        if (empty($username) || empty($email) || empty($messageContent)) {
+            throw new Exception("All fields are required.");
         }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception("Invalid email format.");
+        }
+
+      
+        $messageHandler->saveMessage($username, $email, $messageContent);
+        echo '<script>alert("Message saved successfully.");</script>';
+    } catch (Exception $e) {
+        echo '<script>alert("' . $e->getMessage() . '");</script>';
     }
 }
 
-// Riekzekutimi në faqen `Contact.php`
+echo '<script>alert("Message saved successfully."); window.location.href = "Contact.php";</script>';
 header("Location: Contact.php");
 exit();
 ?>
