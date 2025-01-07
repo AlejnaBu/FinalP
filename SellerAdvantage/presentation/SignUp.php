@@ -1,38 +1,18 @@
 <?php
-require_once '../data/DbConnect.php';
-require_once '../data/UserRepository.php';
-require_once '../business/UserManager.php';
-require_once '../business/Validator.php';
+require_once '../autoload.php'; // Autoloader për të zëvendësuar require_once
 
-use Data\DbConnect;
-use Data\UserRepository;
-use Business\UserManager;
-use Business\Validator;
+use Controllers\SignUpController;
 
-// Inicializo UserRepository dhe UserManager
-$dbConnect = new DbConnect();
-$connection = $dbConnect->getConnection();
-$userRepository = new UserRepository($connection);
-$userManager = new UserManager($userRepository);
+// Inicializimi i kontrolluesit
+$signUpController = new SignUpController();
 
-$errorMessage = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    try {
-        $username = htmlspecialchars(trim($_POST["username"]));
-        $password = htmlspecialchars(trim($_POST["password"]));
-        $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-
-        // Validimi i të dhënave
-        Validator::validateEmail($email);
-        Validator::validatePassword($password);
-
-        // Krijimi i përdoruesit të ri
-        $userManager->createUser($username, $password, $email);
-
-        $successMessage = "User created successfully.";
-    } catch (Exception $e) {
-        $errorMessage = $e->getMessage();
+// Përpunimi i kërkesës POST
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $result = $signUpController->handleSignUp($_POST);
+    if ($result['success']) {
+        $successMessage = $result['message'];
+    } else {
+        $errorMessage = $result['message'];
     }
 }
 ?>
