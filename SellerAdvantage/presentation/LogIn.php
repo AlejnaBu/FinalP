@@ -13,8 +13,8 @@ use Business\Auth;
 use Business\SessionService;
 use Controllers\LoginController;
 
-// Inicializo lidhjet dhe instancat
-$dbConnect = new DbConnect();
+
+$dbConnect = DbConnect::getInstance();
 $connection = $dbConnect->getConnection();
 
 $userRepository = new UserRepository($connection);
@@ -35,6 +35,10 @@ $error = null;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $error = $loginController->handleLogin($_POST);
 }
+
+
+
+
 ?>
 
 <!DOCTYPE html>

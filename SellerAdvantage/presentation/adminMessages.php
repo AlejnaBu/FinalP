@@ -8,7 +8,7 @@ use Data\MessageRepository;
 use Business\MessageHandler;
 
 
-$dbConnect = new DbConnect();
+$dbConnect = DbConnect::getInstance(); 
 $connection = $dbConnect->getConnection();
 $messageRepository = new MessageRepository($connection);
 $messageHandler = new MessageHandler($messageRepository);

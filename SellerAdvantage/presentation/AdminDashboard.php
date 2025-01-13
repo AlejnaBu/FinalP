@@ -12,8 +12,7 @@ use Data\UserRepository;
 use Business\UserManager;
 use Business\Auth;
 
-// Krijo lidhjen me bazën e të dhënave dhe instancat e nevojshme
-$dbConnect = new DbConnect();
+$dbConnect = DbConnect::getInstance();
 $connection = $dbConnect->getConnection();
 
 $userRepository = new UserRepository($connection);

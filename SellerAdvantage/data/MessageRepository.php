@@ -6,8 +6,8 @@ use PDO;
 class MessageRepository {
     private $db;
 
-    public function __construct(PDO $db) {
-        $this->db = $db;
+    public function __construct() {
+        $this->db = DbConnect::getInstance()->getConnection();
     }
 
     public function saveMessage($username, $email, $messageContent) {

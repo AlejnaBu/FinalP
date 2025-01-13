@@ -1,17 +1,23 @@
-<?php 
+<?php
 require_once '../business/auth.php';
-require_once '../data/dbConnect.php';
+require_once '../data/DbConnect.php';
 require_once '../business/UserManager.php';
+require_once '../data/UserRepository.php';
 
-session_start();
 
-$dbConnect = new DbConnect();
+
+use Data\DbConnect;
+use Business\UserManager;
+use Business\Auth;
+use Data\UserRepository;
+
+$dbConnect = DbConnect::getInstance(); // Singleton Pattern
 $connection = $dbConnect->getConnection();
 
-$auth = new Business\Auth($connection);
+$auth = new Auth(new Data\UserRepository($connection));
 $auth->authenticateUser();
 
-$userManager = new UserManager($dbConnect);
+$userManager = new UserManager(new Data\UserRepository($connection));
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create_user"])) {
     $username = htmlspecialchars($_POST["new_username"]);
@@ -32,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create_user"])) {
     }
 }
 ?>
+
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -136,14 +143,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create_user"])) {
 
         </body>
         </html>
-        <?php
-    }
-}
+        
 
-$dbConnect = new DbConnect();
-$userManager = new UserManager($dbConnect);
-$createUserPage = new CreateUserPage($userManager);
-
-$createUserPage->handleUserCreation();
-$createUserPage->render();
-?>

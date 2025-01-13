@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Data\DbConnect;
 use Business\UserManager;
 use Business\Validator;
 
@@ -8,7 +9,7 @@ class SignUpController {
     private $userManager;
 
     public function __construct() {
-        $dbConnect = new \Data\DbConnect();
+        $dbConnect = DbConnect::getInstance();
         $connection = $dbConnect->getConnection();
         $userRepository = new \Data\UserRepository($connection);
         $this->userManager = new UserManager($userRepository);

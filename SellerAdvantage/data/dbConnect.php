@@ -37,8 +37,10 @@ class DbConnect {
         return $this->connection;
     }
 
-    private function __clone() {}
+    public function __clone() {}
 
     
-    private function __wakeup() {}
+    public function __wakeup() {
+        throw new \Exception("Cannot deserialize a Singleton.");
+    }
 }
