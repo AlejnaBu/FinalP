@@ -3,91 +3,198 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f7f3e9; /* Ngjyrë bezhë */
-    color: #5a4635; /* Ngjyrë kafe */
+    background-color: rgb(243, 243, 228); /* Soft beige */
 }
 
+/* Header styles */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background-color: #5a4635;
-    color: #fff;
+    z-index: 1000;
+    background-color: transparent; /* Transparent until scrolled */
+    padding: 10px 30px;
+}
+
+header .headeri {
+    padding: 10px;
 }
 
 header ul {
-    list-style: none;
     display: flex;
-    gap: 20px;
+    justify-content: flex-end;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
 }
 
-header ul li a {
+header li {
+    margin: 0 15px;
+}
+
+header a {
     text-decoration: none;
-    color: #fff;
+    color: black;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
-header ul li a:hover, header ul li a.active {
-    color: #f7f3e9;
+header a:hover {
+    color: rgb(61, 39, 7); /* Dark coffee */
 }
 
-/* About Us section */
-#about-us {
+/* Main Hero Section */
+.main-home {
+    width: 100%;
+    height: 350px;
+    background-image: url('FrontImg.html/aboutus6.jpg');
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+    color: white;
+}
+
+.main-home h1 {
+    font-size: 3rem;
+    font-style: italic;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 768px) {
+    .main-home h1 {
+        font-size: 2rem;
+    }
+}
+
+/* About Us Section */
+.about {
+    background-color: #f9f9f9; /* Light beige */
+    padding: 50px 20px;
     text-align: center;
-    padding: 50px;
-    background-color: #fdf8f2;
 }
 
-#about-us h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #5a4635;
+.about .container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-#about-us p {
-    color: #8c7d6b;
-}
-
-/* Team section */
-#team {
-    padding: 50px;
-    background-color: #f3eadd;
-}
-
-#team h2 {
-    text-align: center;
-    color: #5a4635;
+.about .heading {
+    font-size: 36px;
     margin-bottom: 30px;
+    color: #5a4635; /* Coffee */
 }
 
-.team-container {
+.about .image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about .content h3 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.about .content p {
+    color: #666;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* Customers Section */
+.customers {
+    padding: 50px 20px;
+    background-color: #fdf8f2; /* Light beige */
+}
+
+.customers .heading h2 {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #5a4635; /* Coffee */
+}
+
+.customers-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.customers-container .box {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #fff; /* White */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.customers-container .box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.customers-container .box img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+    border: 3px solid #5a4635; /* Coffee border */
+}
+
+.customers-container .box p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.customers-container .box h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+footer .footer-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+footer .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
     gap: 20px;
 }
 
-.team-member {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    width: 300px;
+footer .footer-links li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.team-member p {
-    margin: 10px 0;
-    color: #5a4635;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #5a4635;
-    color: #f7f3e9;
+footer .footer-links li a:hover {
+    color: #f7f3e9; /* Beige */
 }
