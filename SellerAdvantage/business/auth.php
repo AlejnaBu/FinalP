@@ -13,12 +13,11 @@ class Auth {
     public function authenticate($username, $password) {
         $user = $this->userRepository->getUserByUsername($username);
 
-        // Kontrollo nëse përdoruesi ekziston dhe nëse fjalëkalimi përputhet
-        if ($user && $password === $user['password']) {
-            return $user; // Kthe të dhënat e përdoruesit nëse autentikimi ka sukses
+        // Kontrollo fjalëkalimin pa hashing
+        if ($user && $user['password'] === $password) {
+            return $user;
         }
-
-        return false; // Kthe false nëse autentikimi dështoi
+        return null;
     }
 
     public function authenticateUser() {
@@ -29,4 +28,4 @@ class Auth {
         }
     }
 }
-
+?>

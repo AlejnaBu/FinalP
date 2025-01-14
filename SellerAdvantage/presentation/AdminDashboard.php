@@ -12,6 +12,7 @@ use Data\UserRepository;
 use Business\UserManager;
 use Business\Auth;
 
+// Inicializo komponentët
 $dbConnect = DbConnect::getInstance();
 $connection = $dbConnect->getConnection();
 
@@ -20,14 +21,13 @@ $userManager = new UserManager($userRepository);
 $auth = new Auth($userRepository);
 
 // Kontrollo autentikimin e përdoruesit
-if (!isset($_SESSION['username']) || $_SESSION['usertype'] !== 'admin') {
+if (!isset($_SESSION['username']) || !isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
     header("Location: LogIn.php");
     exit();
 }
 
 // Merr të gjithë përdoruesit
 $users = $userManager->getAllUsers();
-
 if (!is_array($users)) {
     $users = [];
 }
@@ -98,6 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../style/adminDashboard.css">
 </head>
 <body>
 

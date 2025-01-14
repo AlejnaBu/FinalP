@@ -14,16 +14,16 @@ class SessionService {
     }
 
     public function loginUser($username, $usertype) {
+        session_start();
         $_SESSION['username'] = $username;
         $_SESSION['usertype'] = $usertype;
-        $_SESSION['login_time'] = time();
     }
-
+    
     public function redirectBasedOnRole() {
-        if ($_SESSION['usertype'] === "admin") {
-            header("Location: AdminDashboard.php");
+        if ($_SESSION['usertype'] === 'admin') {
+            header("Location: ../presentation/AdminDashboard.php");
         } else {
-            header("Location: FrontPage.php");
+            header("Location: ../presentation/UserDashboard.php");
         }
         exit();
     }

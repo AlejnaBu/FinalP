@@ -41,10 +41,10 @@ class UserRepository {
     }
 
     public function getUserByUsername($username) {
-        $sql = "SELECT * FROM users WHERE username = ?";
-        $stmt = $this->db->prepare($sql);
+        $query = "SELECT * FROM users WHERE username = ?";
+        $stmt = $this->db->prepare($query); // Përdoret $this->db
         $stmt->execute([$username]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 }
 ?>

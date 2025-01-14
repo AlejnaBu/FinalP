@@ -13,7 +13,6 @@ use Business\Auth;
 use Business\SessionService;
 use Controllers\LoginController;
 
-
 $dbConnect = DbConnect::getInstance();
 $connection = $dbConnect->getConnection();
 
@@ -21,24 +20,27 @@ $userRepository = new UserRepository($connection);
 $auth = new Auth($userRepository);
 $sessionService = new SessionService();
 
-// Inicializo Controller-in
 $loginController = new LoginController($auth, $sessionService);
 
-// Nëse përdoruesi është tashmë i kyçur, ridrejtoje
 if ($sessionService->isUserLoggedIn()) {
     $sessionService->redirectBasedOnRole();
     exit();
 }
 
-// Menaxho kërkesën POST për hyrje
 $error = null;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $error = $loginController->handleLogin($_POST);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $user = $auth->authenticate($username, $password);
+    if ($user) {
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['usertype'] = $user['usertype'];
+        $sessionService->redirectBasedOnRole();
+    } else {
+        $error = "Invalid username or password.";
+    }
 }
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
     <link rel="stylesheet" href="../styles/login.css">
-   
 </head>
 
 <body>
@@ -68,6 +69,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="container">
         <div class="container-2">
             <h1>Log In</h1>
+            <?php if ($error): ?>
+                <p style="color: red;"><?php echo $error; ?></p>
+            <?php endif; ?>
             <form action="" method="POST">
                 <div class="input-group">
                     <input class="input-field" type="text" name="username" placeholder="Username" required>
