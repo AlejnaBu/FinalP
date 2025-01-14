@@ -7,7 +7,6 @@ require_once '../data/UserRepository.php';
 use Data\DbConnect;
 use Business\UserManager;
 use Business\Auth;
-use Data\UserRepository;
 
 $dbConnect = DbConnect::getInstance(); // Singleton Pattern
 $connection = $dbConnect->getConnection();
@@ -43,18 +42,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create_user"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create User</title>
-    <link rel="stylesheet" type="text/css" href="../style/createUser.css">
+    <link rel="stylesheet" type="text/css" href="../styles/createUser.css?v=1.1">
+
 </head>
 <body>
 <header>
-    <div class="headeri">
-        <img src="../presentation/FrontImg.html/Logo.png" height="90px" alt="logo">
+    <div class="header-logo">
+        <img src="../FrontImg.html/Logo.png" alt="Logo" height="60">
     </div>
-    <ul>
-        <li><a href="../presentation/adminDashboard.php">Dashboard</a></li>
-        <li><a href="../presentation/LogIn.php">Log In</a></li>
-        <li><a href="../presentation/LogOut.php">Log Out</a></li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="FrontPage.php">Home</a></li>
+            <li><a href="AboutUs.php" class="active">About Us</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <?php if (isset($_SESSION['username'])): ?>
+                <li><a href="LogOut.php">Log Out</a></li>
+            <?php else: ?>
+                <li><a href="LogIn.php">Log In</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 </header>
 
 <form action="" method="post">
@@ -72,5 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create_user"])) {
     <input type="submit" name="create_user" value="Create User">
 </form>
 
+<footer>
+    <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+</footer>
 </body>
 </html>

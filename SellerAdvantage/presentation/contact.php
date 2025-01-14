@@ -1,37 +1,28 @@
-<?php
-require_once '../data/DbConnect.php';
-require_once '../data/MessageRepository.php';
-require_once '../business/MessageHandler.php';
-
-use Data\DbConnect;
-use Data\MessageRepository;
-use Business\MessageHandler;
-
-
-$dbConnect = new DbConnect();
-$connection = $dbConnect->getConnection();
-$messageRepository = new MessageRepository($connection);
-$messageHandler = new MessageHandler($messageRepository);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <link rel="stylesheet" type="text/css" href="../style/contact.css">
+    <link rel="stylesheet" type="text/css" href="../styles/contact.css?v=4">
 </head>
 <body>
 <header>
-    <ul>
-        <li><a href="../presentation/FrontPage.php">Home</a></li>
-        <li><a href="../presentation/AboutUs.php">About Us</a></li>
-        <li><a href="../presentation/contact.php">Contact</a></li>
-        <li><a href="../presentation/LogIn.php">Log In</a></li>
-        <li><a href="../presentation/LogOut.php">Log Out</a></li>
-    </ul>
-
+    <div class="header-logo">
+        <img src="../FrontImg.html/Logo.png" alt="Logo" height="90">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="FrontPage.php">Home</a></li>
+            <li><a href="AboutUs.php" class="active">About Us</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <?php if (isset($_SESSION['username'])): ?>
+                <li><a href="LogOut.php">Log Out</a></li>
+            <?php else: ?>
+                <li><a href="LogIn.php">Log In</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 </header>
 
 <div class="contact-form">

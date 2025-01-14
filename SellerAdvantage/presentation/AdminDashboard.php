@@ -98,23 +98,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="../style/adminDashboard.css">
+    <link rel="stylesheet" type="text/css" href="../styles/adminDashboard.css?v=4">
 </head>
 <body>
 
 <header>
-    <div class="headeri">
-        <img src="../presentation/FrontImg.html/Logo.png" height="90px" alt="logo">
+    <div class="header-logo">
+        <img src="../FrontImg.html/Logo.png" alt="Logo" height="90">
     </div>
-    <ul>
-        <li><a href="../presentation/FrontPage.php">Home</a></li>
-        <li><a href="../presentation/SignUp.php">Sign Up</a></li>
-        <li><a href="../presentation/contact.php">Contact</a></li>
-        <li><a href="../presentation/LogIn.php">Log in</a></li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="FrontPage.php">Home</a></li>
+            <li><a href="AboutUs.php" class="active">About Us</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <?php if (isset($_SESSION['username'])): ?>
+                <li><a href="LogOut.php">Log Out</a></li>
+            <?php else: ?>
+                <li><a href="LogIn.php">Log In</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 </header>
 
-<h1 style="color: orange;">Welcome, Admin!</h1>
+<h1>Welcome, Admin!</h1>
 
 <section class="add-staff">
     <h2>Add New Staff Member</h2>
@@ -129,8 +135,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </form>
 </section>
 
-<p><a href="../presentation/CreateUser.php">Create User</a></p>
-<p><a href="../presentation/adminMessages.php">Get Messages</a></p>
+<div class="actions">
+    <a href="../presentation/CreateUser.php" class="button">Create User</a>
+    <a href="../presentation/adminMessages.php" class="button">Get Messages</a>
+</div>
 
 <div class="div">
     <table>
@@ -168,5 +176,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </table>
 </div>
 
+<footer>
+    <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+</footer>
 </body>
 </html>
