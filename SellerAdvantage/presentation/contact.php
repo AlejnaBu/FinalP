@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <link rel="stylesheet" type="text/css" href="http://localhost:8008/FinalP2/FinalP/SellerAdvantage/styles/contact.css?v=4">
+    <link rel="stylesheet" type="text/css" href="../styles/contact.css">
 
 
 

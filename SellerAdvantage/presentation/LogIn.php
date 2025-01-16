@@ -1,22 +1,32 @@
 <?php
 session_start();
 
-require_once '../autoload.php';
+require_once '../autoload.php'; 
 
 use Controllers\LoginController;
+use Business\Auth;
+use Business\SessionService;
+use Data\UserRepository; 
 
-$loginController = new LoginController();
+
+$userRepository = new UserRepository(); 
+$auth = new Auth($userRepository); 
+$sessionService = new SessionService(); 
+
+
+$loginController = new LoginController($auth, $sessionService);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = $loginController->handleLogin($_POST);
-    if ($result['success']) {
+    if (!$result) { 
         header("Location: adminDashboard.php");
         exit();
-    } else {
-        $errorMessage = $result['message'];
+    } else { // Login failed, show error
+        $errorMessage = $result;
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
