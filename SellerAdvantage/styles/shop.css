@@ -5,6 +5,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
     color: #333;
+    scroll-behavior: smooth;
 }
 
 /* Header */
@@ -17,13 +18,13 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95); /* Transparencë për ndjesinë moderne */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
 header img {
-    height: 50px;
+    height: 60px;
 }
 
 header ul {
@@ -38,17 +39,21 @@ header li a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    transition: color 0.3s;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
 }
 
 header li a:hover {
-    color: #e67e22;
+    background-color: #e67e22;
+    color: #fff;
 }
 
 /* Main Section */
 .main-home {
     width: 100%;
-    height: 300px;
+    height: 400px;
     background-image: url('../FrontImg.html/shopheader.png');
     background-size: cover;
     background-position: center;
@@ -61,18 +66,36 @@ header li a:hover {
 
 .main-text h1 {
     color: #fff;
-    font-size: 2.5rem;
+    font-size: 3rem;
     text-transform: capitalize;
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
+/* Stilimi për seksionin "Our Christmas Related Products" */
+.center-text {
+    text-align: center; /* Qendron tekstin horizontalisht */
+    margin: 40px 0; /* Shto hapësirë mbi dhe poshtë */
+}
+
+.center-text h2 {
+    font-size: 2rem; /* Madhësi e qartë dhe e dallueshme */
+    font-weight: bold;
+    color: #333; /* Ngjyrë e errët për lexueshmëri */
+    text-transform: uppercase; /* Tekst i madh për rëndësi */
+    letter-spacing: 2px; /* Hapësirë midis shkronjave */
+    border-bottom: 2px solid #e67e22; /* Vijë dekorative poshtë titullit */
+    display: inline-block; /* E bën vijën të përshtatet me madhësinë e titullit */
+    padding-bottom: 5px; /* Hapësirë midis tekstit dhe vijës */
+}
+
 
 /* Products Section */
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Kolonat përshtaten me ekranin */
     gap: 20px;
     padding: 40px;
+    margin-top: 20px;
 }
 
 .product {
@@ -81,18 +104,25 @@ header li a:hover {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
 .product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px); /* Efekt ngritjeje */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .product img {
     width: 100%;
+    height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product:hover img {
+    transform: scale(1.05); /* Zmadhohet pak kur kalon miu */
 }
 
 .product h4 {
@@ -115,11 +145,12 @@ header li a:hover {
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .product button:hover {
     background-color: #45a049;
+    transform: scale(1.05); /* Pak efekt kur kalon miu */
 }
 
 /* Footer */
@@ -143,7 +174,7 @@ footer {
 .footer-links li a {
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s ease-in-out;
 }
 
 .footer-links li a:hover {
@@ -153,15 +184,18 @@ footer {
 /* Responsiveness */
 @media (max-width: 768px) {
     .main-home {
-        height: 200px;
+        height: 250px;
     }
 
     .main-text h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     .products {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    header ul {
         gap: 15px;
     }
 }

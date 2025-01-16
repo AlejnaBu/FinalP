@@ -2,16 +2,21 @@
 session_start();
 require_once '../autoload.php';
 
-use Controllers\MessageController;
+use Business\MessageHandler;
+use Data\MessageRepository;
 
-$messageController = new MessageController();
-
+// Kontrollo nëse përdoruesi është admin
 if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
     header("Location: LogIn.php");
     exit();
 }
 
-$messages = $messageController->getMessages();
+// Krijimi i instancës së MessageHandler
+$messageRepository = new MessageRepository();
+$messageHandler = new MessageHandler($messageRepository);
+
+// Merr mesazhet nga baza e të dhënave
+$messages = $messageHandler->getMessages();
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +25,8 @@ $messages = $messageController->getMessages();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Messages</title>
-    <link rel="stylesheet" href="../styles/adminMessages.css">
+    <link rel="stylesheet" type="text/css" href="../styles/adminMessages.css?v=4">
+
 </head>
 <body>
 <header>
@@ -53,7 +59,7 @@ $messages = $messageController->getMessages();
                     <td><?= htmlspecialchars($message['id']); ?></td>
                     <td><?= htmlspecialchars($message['username']); ?></td>
                     <td><?= htmlspecialchars($message['email']); ?></td>
-                    <td><?= htmlspecialchars($message['message']); ?></td>
+                    <td><?= htmlspecialchars($message['messages']); ?></td> <!-- Sigurohu që kolonat janë të sakta -->
                 </tr>
             <?php endforeach; ?>
         </tbody>

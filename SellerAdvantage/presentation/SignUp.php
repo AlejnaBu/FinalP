@@ -1,5 +1,5 @@
 <?php
-require_once '../autoload.php'; // Autoloader për të zëvendësuar require_once
+require_once '../autoload.php';
 
 use Controllers\SignUpController;
 
@@ -18,11 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <!DOCTYPE html>
-<head>
-
-    <link rel="stylesheet" href="../styles/signup.css"> <!-- Path corrected for CSS -->
-</head>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../styles/signup.css">
+</head>
+<body>
 <header>
     <div class="headeri">
         <img src="../FrontImg.html/Logo.png" alt="Logo">
@@ -32,14 +35,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <li><a href="AboutUs.php">About Us</a></li>
         <li><a href="contact.php">Contact</a></li>
         <li><a href="LogIn.php">Log In</a></li>
-        <li><a href="LogOut.php">Log Out</a></li>
     </ul>
 </header>
 
 <div class="container">
     <div class="container-2">
         <h1>Sign Up</h1>
-        <?php if (isset($errorMessage)): ?>
+        <?php if (isset($successMessage)): ?>
+            <p style="color: green;"><?php echo $successMessage; ?></p>
+        <?php elseif (isset($errorMessage)): ?>
             <p style="color: red;"><?php echo $errorMessage; ?></p>
         <?php endif; ?>
         <form action="" method="POST">

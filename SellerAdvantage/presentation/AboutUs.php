@@ -21,7 +21,8 @@ $staff = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="About Us Page">
     <title>About Us</title>
-    <link rel="stylesheet" href="../styles/aboutus.css?v=1.0"> <!-- Versionim për caching -->
+    <link rel="stylesheet" href="../styles/aboutus.css?v=2">
+
 </head>
 <body>
 <header>
